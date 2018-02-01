@@ -12,8 +12,7 @@ import os.log
 class AboutViewController: UIViewController {
 
     
-    var userSettings: Settings = Settings(unitIsUS: "Fahrenheit", defaultIsLocation: "CurrentLocation", adIsDisabled: "false")
-    
+    var userSettings = Settings(unitIsUS: "Fahrenheit", defaultIsLocation: "CurrentLocation", adIsDisabled: "false", allowAdvisories: "false", allowWatches: "false", allowWarnings: "true")
     @IBOutlet weak var settingLabelTop: NSLayoutConstraint!
     @IBOutlet weak var backLabelTop: NSLayoutConstraint!
     @IBOutlet weak var navBarHeight: NSLayoutConstraint!
@@ -23,6 +22,10 @@ class AboutViewController: UIViewController {
     @IBOutlet weak var backButtonLabel: UILabel!
     var cityName = ""
     @IBOutlet weak var adSwitch: UISwitch!
+    @IBOutlet weak var advisorySwitch: UISwitch!
+    @IBOutlet weak var watchSwitch: UISwitch!
+    @IBOutlet weak var warningSwitch: UISwitch!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +48,7 @@ class AboutViewController: UIViewController {
             // Load the sample data.
             print("No saved settings")
         }
+        
        
         if userSettings.getDefaultLocation() == "CurrentLocation" {
             defualtLocationSwitch.isOn = true
@@ -59,6 +63,27 @@ class AboutViewController: UIViewController {
         }
         else {
             unitSelector.selectedSegmentIndex = 1
+        }
+        
+        if userSettings.getAdvisories() == "false"{
+            advisorySwitch.isOn = false
+        }
+        else{
+            advisorySwitch.isOn = true
+        }
+        
+        if userSettings.getWatches() == "false"{
+            watchSwitch.isOn = false
+        }
+        else{
+            watchSwitch.isOn = true
+        }
+        
+        if userSettings.getWarnings() == "false"{
+            warningSwitch.isOn = false
+        }
+        else{
+            warningSwitch.isOn = true
         }
         
     }
@@ -93,19 +118,56 @@ class AboutViewController: UIViewController {
         }
     }
 
-    @IBAction func didSwitchAds(_ sender: UISwitch) {
+//    @IBAction func didSwitchAds(_ sender: UISwitch) {
+//        if !sender.isOn{
+//            userSettings.setAdStatus(adIsDisabled: "false")
+//            saveSettings()
+//        }
+//        else{
+//            userSettings.setAdStatus(adIsDisabled: "true")
+//            saveSettings()
+//        }
+//    }
+
+    @IBAction func didSwitchAdvsiory(_ sender: UISwitch) {
         if !sender.isOn{
-            userSettings.setAdStatus(adIsDisabled: "false")
+            userSettings.setAdvisories(allowAdvisories: "false")
             saveSettings()
         }
         else{
-            userSettings.setAdStatus(adIsDisabled: "true")
+            userSettings.setAdvisories(allowAdvisories: "true")
+            saveSettings()
+        }
+    }
+    
+    @IBAction func didSwitchWatch(_ sender: UISwitch) {
+        if !sender.isOn{
+            userSettings.setWatches(allowWatches: "false")
+            saveSettings()
+        }
+        else{
+            userSettings.setWatches(allowWatches: "true")
+            saveSettings()
+        }
+    }
+    
+    @IBAction func didSwicthWarning(_ sender: UISwitch) {
+        if !sender.isOn{
+            userSettings.setWarnings(allowWarnings: "false")
+            saveSettings()
+        }
+        else{
+            userSettings.setWarnings(allowWarnings: "true")
             saveSettings()
         }
     }
 
+    
+    
     @IBAction func didPressPoweredBy(_ sender: Any) {
-        UIApplication.shared.openURL(URL(string: "https://darksky.net/poweredby/")!)
+//        let url = URL(fileURLWithPath: "https://darksky.net/poweredby/")
+//        UIApplication.shared.open(url, options: [:])
+    UIApplication.shared.openURL(URL(string: "https://darksky.net/poweredby/")!)
     }
     
     private func saveSettings() {

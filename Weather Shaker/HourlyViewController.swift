@@ -14,7 +14,7 @@ class HourlyViewController: UIViewController, UITableViewDataSource {
 
     static let sharedInstance = HourlyViewController()
     @IBOutlet weak var tableView: UITableView!
-    var refreshControl: UIRefreshControl!
+    //var refreshControl: UIRefreshControl!
     let uiColors = TextColor()
 
     @IBOutlet weak var tableViewBottom: NSLayoutConstraint!
@@ -41,20 +41,20 @@ class HourlyViewController: UIViewController, UITableViewDataSource {
     var sunriseTime: Date?
     var sunsetTime: Date?
     var textColor = [UIColor]()
-    
+    var data: forcastData?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        WeatherGetter.sharedInstance.hourlyControllerDidLoad()
-        WeatherUpdater.sharedInstance.setHourlyController(hourlyController: self)
-        WeatherGetter.sharedInstance.updateHourly()
-        
-        refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "")
-        refreshControl.addTarget(self, action: #selector(self.refresh), for: UIControlEvents.valueChanged)
-        tableView.addSubview(refreshControl)
+//        WeatherGetter.sharedInstance.hourlyControllerDidLoad()
+//        WeatherUpdater.sharedInstance.setHourlyController(hourlyController: self)
+//        WeatherGetter.sharedInstance.updateHourly()
+//        
+//        refreshControl = UIRefreshControl()
+//        refreshControl.attributedTitle = NSAttributedString(string: "")
+//        refreshControl.addTarget(self, action: #selector(self.refresh), for: UIControlEvents.valueChanged)
+//        tableView.addSubview(refreshControl)
 
 
         if UIDevice().userInterfaceIdiom == .phone {
@@ -67,6 +67,8 @@ class HourlyViewController: UIViewController, UITableViewDataSource {
                 tableViewBottom.constant = -33
             }
         }
+        
+        updateLabels()
     }
 
     override func didReceiveMemoryWarning() {
@@ -85,27 +87,25 @@ class HourlyViewController: UIViewController, UITableViewDataSource {
     }
     */
     
-    func updateLabels(data: forcastData) {
-        
-        let currentTime = Date(timeIntervalSince1970: Double (Date().timeIntervalSince1970))
-        textColor = uiColors.getColorTextArray(data: data, currentTime: currentTime)
+    func updateLabels() {
         
         
-        backButtonLabel.text = data.getCityName()
+     
+        backButtonLabel.text = data!.getCityName()
         hourlyLabel.textColor = textColor[7]
-        hourlyTime = data.getHourlyTime(formatType: "h:mm a")
-        hourlyIcon = data.getHourlyIcon()
-        hourlyTemp = data.getHourlyTemp()
-        hourlyRainChance = data.getHourlyRainChanceExtended()
-        coordinates = data.getLocation()
-        cityName = data.getCityName()
-        dayOfWeek = data.getHourlyDayOfWeek()
-        hourlyWindDirection = data.getHourlyWindDirection()
-        hourlyFeelsLike = data.getHourlyFeelsLike()
-        hourlyWindSpeed = data.getHourlyWindSpeed()
-        hourlyTimeDateFormat = data.getHourlyTimeDate()
-        sunriseTime = data.getSunriseTime()
-        sunsetTime = data.getSunsetTime()
+        hourlyTime = data!.getHourlyTime(formatType: "h:mm a")
+        hourlyIcon = data!.getHourlyIcon()
+        hourlyTemp = data!.getHourlyTemp()
+        hourlyRainChance = data!.getHourlyRainChanceExtended()
+        coordinates = data!.getLocation()
+        cityName = data!.getCityName()
+        dayOfWeek = data!.getHourlyDayOfWeek()
+        hourlyWindDirection = data!.getHourlyWindDirection()
+        hourlyFeelsLike = data!.getHourlyFeelsLike()
+        hourlyWindSpeed = data!.getHourlyWindSpeed()
+        hourlyTimeDateFormat = data!.getHourlyTimeDate()
+        sunriseTime = data!.getSunriseTime()
+        sunsetTime = data!.getSunsetTime()
         
         navBar.layer.shadowColor = textColor[7].cgColor
         navBar.layer.shadowOpacity = 0.5
@@ -197,9 +197,9 @@ class HourlyViewController: UIViewController, UITableViewDataSource {
         return cell
     }
     
-    func refresh(sender:AnyObject) {
-        WeatherGetter.sharedInstance.getWeather(coordinates: coordinates, city: cityName)
-        refreshControl.endRefreshing()
-    }
+//    func refresh(sender:AnyObject) {
+//        WeatherGetter.sharedInstance.getWeather(coordinates: coordinates, city: cityName)
+//        refreshControl.endRefreshing()
+//    }
     
 }

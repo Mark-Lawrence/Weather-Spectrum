@@ -28,9 +28,10 @@ struct forcastData {
     var timeZone = 0
     var sunsetTime = 0
     var sunriseTime = 0
-    var moonPhase = 0
+    var moonPhase = 0.0
     var smartSummary = ""
     var uvIndex = 0
+    var rainIntensity = 0.0
     
     var hourlyTime = [Int]()
     var hourlyIcon = [String]()
@@ -54,11 +55,12 @@ struct forcastData {
     var units = ""
     var location = ""
     var cityName = ""
+    var alerts = [Alert]()
 
 
     
     
-    init(summary: String, icon: String, feelsLike: Int, temperature: Int, dewPoint: Int, humidity: Double, pressure: Int, cloudCoverage: Double, windSpeed: Int, lastTimeUpdated: Int, timeZone: Int, sunsetTime: Int, sunriseTime: Int, moonPhase: Int, smartSummary: String, hourlyTime: [Int], hourlyIcon: [String], hourlyRainChance: [Double],hourlyTemp: [Int], weeklyTime: [Int], weeklyIcon: [String], weeklyHigh: [Int], weeklyLow: [Int], weeklyRainChance: [Double], weeklySummary:[String], location: String, cityName: String, uvIndex: Int, hourlyPercipitationType: [String], hourlyWindSpeed: [Double], hourlyWindDirection: [Double], hourlyFeelsLike: [Int], weeklySunrise: [Int], weeklySunset: [Int], weeklyPercipitationType: [String], units: String) {
+    init(summary: String, icon: String, feelsLike: Int, temperature: Int, dewPoint: Int, humidity: Double, pressure: Int, cloudCoverage: Double, windSpeed: Int, lastTimeUpdated: Int, timeZone: Int, sunsetTime: Int, sunriseTime: Int, moonPhase: Double, smartSummary: String, rainIntensity: Double, hourlyTime: [Int], hourlyIcon: [String], hourlyRainChance: [Double],hourlyTemp: [Int], weeklyTime: [Int], weeklyIcon: [String], weeklyHigh: [Int], weeklyLow: [Int], weeklyRainChance: [Double], weeklySummary:[String], location: String, cityName: String, uvIndex: Int, hourlyPercipitationType: [String], hourlyWindSpeed: [Double], hourlyWindDirection: [Double], hourlyFeelsLike: [Int], weeklySunrise: [Int], weeklySunset: [Int], weeklyPercipitationType: [String], units: String, alerts: [Alert]) {
         self.summary = summary
         self.icon = icon
         self.temperature = temperature
@@ -75,6 +77,7 @@ struct forcastData {
         self.moonPhase = moonPhase
         self.smartSummary = smartSummary
         self.uvIndex = uvIndex
+        self.rainIntensity = rainIntensity
         
         
         self.hourlyTemp = hourlyTemp
@@ -102,6 +105,7 @@ struct forcastData {
         self.location = location
         self.cityName = cityName
         self.units = units
+        self.alerts = alerts
     }
     
 
@@ -153,6 +157,9 @@ struct forcastData {
     func getLastUpdatedTime() -> String {
         return String (getFormatedTime(timeToFormat: lastTimeUpdated, dateFormatType: "EEEE, MMMM d", timeZoneSupprt: true))
     }
+    func getLastUpdatedTimeAlert() -> String {
+        return String (getFormatedTime(timeToFormat: lastTimeUpdated, dateFormatType: "MMMM d, h:mm a", timeZoneSupprt: true))
+    }
     
     func getSunsetTime() -> Date {
          let date = Date(timeIntervalSince1970: Double (sunsetTime))
@@ -183,6 +190,13 @@ struct forcastData {
         return String (uvIndex)
     }
     
+    func getMoonPhase() -> Double {
+        return moonPhase
+    }
+    
+    func getRainIntensity() -> Double {
+        return rainIntensity
+    }
     
     
     func getHourlyTime(formatType: String) -> [String] {
@@ -355,6 +369,9 @@ struct forcastData {
         return cityName
     }
 
+    func getAlerts() -> [Alert] {
+        return alerts
+    }
     
     func getFormatedTime(timeToFormat: Int, dateFormatType: String, timeZoneSupprt: Bool) -> String {
         
@@ -377,6 +394,68 @@ struct forcastData {
     func getDayOfWeekLong(timeToFormat: Int) -> String {
         
         return String (getFormatedTime(timeToFormat: timeToFormat, dateFormatType: "EEEE", timeZoneSupprt: true))
+    }
+    
+}
+
+class Alert {
+    
+    let dateFormatter = DateFormatter()
+    
+    var description = ""
+    var expieres = 0
+    var serverity = ""
+    var time = 0
+    var title = ""
+    var alertURL = ""
+    var timeZone = 0
+    
+    init(description: String, expieres: Int, serverity: String, time: Int, title: String, alertURL: String, timeZone: Int) {
+        self.description = description
+        self.expieres = expieres
+        self.serverity = serverity
+        self.time = time
+        self.title = title
+        self.alertURL = alertURL
+        self.timeZone = timeZone
+    }
+   
+    func getDescription() -> String {
+        return description
+    }
+    
+    func getExpiers() -> String {
+        return String ("\(getFormatedTime(timeToFormat: expieres, dateFormatType: "MMMM d, h:mm a", timeZoneSupprt: true))")
+    }
+    
+    
+    func getServerity() -> String {
+        return serverity
+    }
+    func getTime() -> String {
+        return String ("\(getFormatedTime(timeToFormat: time, dateFormatType: "MMMM d, h:mm a", timeZoneSupprt: true))")
+    }
+    
+    func getTitle() -> String {
+        return title
+    }
+    
+    func getAlertURL() -> String {
+        return alertURL
+    }
+    
+    func getFormatedTime(timeToFormat: Int, dateFormatType: String, timeZoneSupprt: Bool) -> String {
+        
+        let date = Date(timeIntervalSince1970: Double (timeToFormat))
+        if timeZoneSupprt {
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: timeZone*3600) //Set timezone that you want
+        }
+        
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = dateFormatType //Specify your format that you want
+        
+        let strDate = dateFormatter.string(from: date)
+        return strDate
     }
     
 }

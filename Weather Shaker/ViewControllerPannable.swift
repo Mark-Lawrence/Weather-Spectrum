@@ -16,9 +16,12 @@ class ViewControllerPannable: UIViewController {
     
     var mainViewController = WeatherUpdater.sharedInstance.getViewController()
     
-    var cityListController: CityListViewController?
+    //var cityListController: CityListViewController?
     
-    @IBOutlet weak var dragDownArrow: UIImageView!
+    //@IBOutlet weak var dragDownArrow: UIImageView!
+    
+    var dragDownArrow = UIImageView()
+
     
     
     override func viewDidLoad() {

@@ -16,6 +16,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     var locationManager: CLLocationManager = CLLocationManager()
     
     let uiColors = TextColor()
+    var textColorArray = [UIColor]()
+    
     var backgroundColorArray = [CGColor]()
     let gradient = CAGradientLayer()
     let navBar = CAGradientLayer()
@@ -25,10 +27,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     var tableSize: [[Int]] = [[1,2,3],[1]]
     
     
+    @IBOutlet weak var cityNameWidth: NSLayoutConstraint!
+    @IBOutlet weak var warningViewBottom: NSLayoutConstraint!
     @IBOutlet weak var tableViewBottom: NSLayoutConstraint!
     @IBOutlet weak var loadViewBottom: NSLayoutConstraint!
     @IBOutlet weak var cityListTop: NSLayoutConstraint!
     @IBOutlet weak var dateLabelTop: NSLayoutConstraint!
+    
+    
+    @IBOutlet weak var warningImage: UIImageView!
+    @IBOutlet weak var warningLabel: UILabel!
+    @IBOutlet weak var warningView: UIView!
     @IBOutlet weak var NavigationBar: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dateLabel: UILabel!
@@ -59,7 +68,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     var longitude: Double?
     var weatherData: forcastData?
     var cityName = ""
-    var userSettings = Settings(unitIsUS: "Fahrenheit", defaultIsLocation: "CurrentLocation", adIsDisabled: "false")
+    
+    var userSettings = Settings(unitIsUS: "Fahrenheit", defaultIsLocation: "CurrentLocation", adIsDisabled: "false", allowAdvisories: "false", allowWatches: "false", allowWarnings: "true")
 
     @IBOutlet weak var updateSpinner: UIActivityIndicatorView!
     
@@ -68,13 +78,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     
     func loadCurrentlyApp() {
         updateSpinner.isHidden = false
-        
+        print("RELOADING EVERUTHING")
         
         if let attemptToLoadSettings = loadSettings(){
             userSettings = attemptToLoadSettings
         }
-        print(  )
-        print(userSettings.getAdStatus())
         let defaultCity = loadCities()
 
         if userSettings.getDefaultLocation() == "CurrentLocation" {
@@ -120,11 +128,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
                 cityListTop.constant = 40
                 loadViewBottom.constant = -34
                 tableViewBottom.constant = -200
+                warningViewBottom.constant = 6
             }
         }
         
+        // here we instantiate an object of gesture recognizer
+        let gestureRec = UITapGestureRecognizer(target: self, action:  #selector (self.goToAlertView (_:)))
+        // here we add it to our custom view
+        warningView.addGestureRecognizer(gestureRec)
+        warningView.layer.cornerRadius = 7
         
         self.loadCurrentlyApp()
+        
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -182,6 +197,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     
     
     func updateLabels(data: forcastData) {
+        
+        //get new colors
+        let currentTime = Date(timeIntervalSince1970: Double (Date().timeIntervalSince1970))
+        textColorArray = uiColors.getColorTextArray(data: data, currentTime: currentTime)
+        
+        
+        //Makes sure user wants to see the warnings
+    
+        updateWarningUI(data: data)
+        
         cityNameLabel.text = data.getCityName()
         cityName = data.getCityName()
         dateLabel.text = data.getLastUpdatedTime().uppercased()
@@ -218,6 +243,67 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         self.tableView.reloadData()
     }
     
+    func updateWarningUI(data: forcastData) {
+        
+        if let attemptToLoadSettings = loadSettings(){
+            userSettings = attemptToLoadSettings
+        }
+        
+        
+        if (data.getAlerts().count == 0) || ((userSettings.getWarnings() == "false") && (userSettings.getAdvisories() == "false") && (userSettings.getWatches() == "false")){
+            print("There are no warnings or user doesn't want to see them")
+            warningView.isHidden = true
+            cityNameWidth.constant = screenSize.width-50
+        }
+            
+        else{
+            print("there are warnings")
+            warningView.isHidden = false
+            cityNameWidth.constant = 198
+            var mostServere = -1
+            var tempServere = -1
+            for index in 0...data.getAlerts().count-1{
+                switch data.getAlerts()[index].getServerity(){
+                case "advisory":
+                    if userSettings.getAdvisories() == "true"{
+                    tempServere = 0
+                    }
+                case "watch":
+                    if userSettings.getWatches() == "true"{
+                       tempServere = 1
+                    }
+                case "warning":
+                    if userSettings.getWarnings() == "true"{
+                        tempServere = 2
+                    }
+                default:
+                    tempServere = 5
+                }
+                if tempServere > mostServere{
+                    mostServere = tempServere
+                }
+                tempServere = -1
+            }
+            print("most Servere \(mostServere)")
+            switch mostServere{
+            case -1:
+                print("user doesn't want to see the only warnings")
+                warningView.isHidden = true
+                cityNameWidth.constant = screenSize.width
+            case 0:
+                warningLabel.text = "Advisory"
+                warningImage.image = #imageLiteral(resourceName: "advisory")
+            case 1:
+                warningLabel.text = "Watch"
+                warningImage.image = #imageLiteral(resourceName: "Watch")
+            case 2:
+                warningLabel.text = "Warning"
+                warningImage.image = #imageLiteral(resourceName: "Warning")
+            default:
+                print("NO SERVERITY")
+            }
+        }
+    }
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -399,15 +485,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         return NSKeyedUnarchiver.unarchiveObject(withFile: Settings.ArchiveURL.path) as? Settings
     }
     
-    
+    func goToAlertView(_ sender:UITapGestureRecognizer){
+        // this is the function that lets us perform the segue
+        performSegue(withIdentifier: "toAlertView", sender: self)
+        UIView.animate(withDuration: 0.2) {
+            self.warningView.backgroundColor = UIColor.lightGray
+        }
+        UIView.animate(withDuration: 0.2) {
+            self.warningView.backgroundColor = UIColor.white
+        }
+    }
     
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         self.navigationController?.navigationBar.backItem?.title = cityName
-        
         if (segue.identifier == "toCityList") {
             
             UIView.animate(withDuration: 0.2, animations: {
@@ -418,10 +511,39 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
             controller.darkColor = backgroundColorArray[0]
         }
         
+        if (segue.identifier == "toHourly"){
+            let controller = segue.destination as! HourlyViewController
+            controller.textColor = textColorArray
+            controller.data = weatherData!
+        }
+        
+        if segue.identifier == "toWeekly"{
+            let controller = segue.destination as! WeeklyViewController
+            controller.textColor = textColorArray
+            controller.data = weatherData!
+            
+        }
+        
+        if segue.identifier == "toCurrently"{
+            let controller = segue.destination as! CurrentlyViewController
+            controller.textColor = textColorArray
+            controller.data = weatherData!
+        }
         if (segue.identifier == "toSettings") {
             
             let controller = segue.destination as! AboutViewController
             controller.cityName = cityName
+        }
+        
+        if (segue.identifier == "toAlertView"){
+            UIView.animate(withDuration: 0.2, animations: {
+                self.darkenBackground.alpha = 0.28
+            })
+            let controller = segue.destination as! AlertViewController
+            controller.alertData = (weatherData?.getAlerts())!
+            controller.dateLastUpdated = (weatherData?.getLastUpdatedTimeAlert())!
+            controller.mainViewController = self
+            controller.weatherData = weatherData
         }
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.

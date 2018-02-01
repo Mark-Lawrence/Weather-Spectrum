@@ -32,12 +32,12 @@ class WeeklyViewController: UIViewController, UITableViewDataSource {
     var dayOfWeek = [String]()
     var textColor = [UIColor]()
     
-    var weeklyData: forcastData?
+    var data: forcastData?
 
     @IBOutlet weak var cityNameLabel: UILabel!
     
-    static let sharedInstance = WeeklyViewController()
-    var refreshControl: UIRefreshControl!
+//    static let sharedInstance = WeeklyViewController()
+//    var refreshControl: UIRefreshControl!
     
     
     override func viewDidLoad() {
@@ -52,18 +52,19 @@ class WeeklyViewController: UIViewController, UITableViewDataSource {
                 navBarBlurHeight.constant = 130
                 tableViewBottom.constant = -33
             }
+            updateLabels()
         }
 
         
         // Do any additional setup after loading the view.
-        WeatherGetter.sharedInstance.weeklyControllerDidLoad()
-        WeatherUpdater.sharedInstance.setWeeklyController(weeklyController: self)
-        WeatherGetter.sharedInstance.updateWeekly()
+//        WeatherGetter.sharedInstance.weeklyControllerDidLoad()
+//        WeatherUpdater.sharedInstance.setWeeklyController(weeklyController: self)
+//        WeatherGetter.sharedInstance.updateWeekly()
         
-        refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "")
-        refreshControl.addTarget(self, action: #selector(self.refresh), for: UIControlEvents.valueChanged)
-        tableView.addSubview(refreshControl)
+//        refreshControl = UIRefreshControl()
+//        refreshControl.attributedTitle = NSAttributedString(string: "")
+//        refreshControl.addTarget(self, action: #selector(self.refresh), for: UIControlEvents.valueChanged)
+//        tableView.addSubview(refreshControl)
         
         
       
@@ -86,26 +87,22 @@ class WeeklyViewController: UIViewController, UITableViewDataSource {
         // Dispose of any resources that can be recreated.
     }
     
-    func updateLabels(data: forcastData) {
+    func updateLabels() {
         
-        weeklyData = data
+        //weeklyData = data
         
-        let uiColors = TextColor()
-        let currentTime = Date(timeIntervalSince1970: Double (Date().timeIntervalSince1970))
-        textColor = uiColors.getColorTextArray(data: data, currentTime: currentTime)
-        
-        weeklyTime = data.getWeeklyTime()
-        weeklyIcon = data.getWeeklyIcon()
-        weeklyHigh = data.getWeeklyHigh()
-        weeklyLow = data.getWeeklyLow()
-        weeklyRainChance = data.getWeeklyRainChanceExtended()
-        weeklySummary = data.getWeeklySummary()
-        coordinates = data.getLocation()
-        cityName = data.getCityName()
-        dayOfWeek = data.getWeeklyDayOfWeek()
+        weeklyTime = data!.getWeeklyTime()
+        weeklyIcon = data!.getWeeklyIcon()
+        weeklyHigh = data!.getWeeklyHigh()
+        weeklyLow = data!.getWeeklyLow()
+        weeklyRainChance = data!.getWeeklyRainChanceExtended()
+        weeklySummary = data!.getWeeklySummary()
+        coordinates = data!.getLocation()
+        cityName = data!.getCityName()
+        dayOfWeek = data!.getWeeklyDayOfWeek()
         
         sevenDayLabel.textColor = textColor[7]
-        cityNameLabel.text = data.getCityName()
+        cityNameLabel.text = data!.getCityName()
         
         navBar.layer.shadowColor = textColor[7].cgColor
         navBar.layer.shadowOpacity = 0.5
@@ -153,11 +150,11 @@ class WeeklyViewController: UIViewController, UITableViewDataSource {
     }
     
     
-    func refresh(sender:AnyObject) {
-        //  your code to refresh tableView
-        WeatherGetter.sharedInstance.getWeather(coordinates: coordinates, city: cityName)
-        refreshControl.endRefreshing()
-    }
+//    func refresh(sender:AnyObject) {
+//        //  your code to refresh tableView
+//        WeatherGetter.sharedInstance.getWeather(coordinates: coordinates, city: cityName)
+//        //refreshControl.endRefreshing()
+//    }
     
     
     

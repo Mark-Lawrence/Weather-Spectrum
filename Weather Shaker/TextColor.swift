@@ -31,24 +31,6 @@ class TextColor {
     let postSunset7 = UIColor(red: 150.0/255.0, green: 65.0/255.0, blue: 187.0/255.0, alpha: 1.0)
     let postSunset8 = UIColor(red: 130.0/255.0, green: 52.0/255.0, blue: 207.0/255.0, alpha: 1.0)
     
-    let night1 = UIColor(red: 8.0/255.0, green: 57.0/255.0, blue: 149.0/255.0, alpha: 1.0)
-    let night2 = UIColor(red: 19.0/255.0, green: 50.0/255.0, blue: 151.0/255.0, alpha: 1.0)
-    let night3 = UIColor(red: 29.0/255.0, green: 44.0/255.0, blue: 152.0/255.0, alpha: 1.0)
-    let night4 = UIColor(red: 39.0/255.0, green: 36.0/255.0, blue: 153.0/255.0, alpha: 1.0)
-    let night5 = UIColor(red: 50.0/255.0, green: 33.0/255.0, blue: 155.0/255.0, alpha: 1.0)
-    let night6 = UIColor(red: 62.0/255.0, green: 28.0/255.0, blue: 156.0/255.0, alpha: 1.0)
-    let night7 = UIColor(red: 73.0/255.0, green: 24.0/255.0, blue: 158.0/255.0, alpha: 1.0)
-    let night8 = UIColor(red: 86.0/255.0, green: 20.0/255.0, blue: 159.0/255.0, alpha: 1.0)
-    
-    let dayRain1 = UIColor(red: 150.0/255.0, green: 159.0/255.0, blue: 170.0/255.0, alpha: 1.0)
-    let dayRain2 = UIColor(red: 133.0/255.0, green: 144.0/255.0, blue: 166.0/255.0, alpha: 1.0)
-    let dayRain3 = UIColor(red: 119.0/255.0, green: 131.0/255.0, blue: 163.0/255.0, alpha: 1.0)
-    let dayRain4 = UIColor(red: 106.0/255.0, green: 120.0/255.0, blue: 161.0/255.0, alpha: 1.0)
-    let dayRain5 = UIColor(red: 90.0/255.0, green: 105/255.0, blue: 158.0/255.0, alpha: 1.0)
-    let dayRain6 = UIColor(red: 75.0/255.0, green: 92.0/255.0, blue: 156.0/255.0, alpha: 1.0)
-    let dayRain7 = UIColor(red: 62.0/255.0, green: 81.0/255.0, blue: 153.0/255.0, alpha: 1.0)
-    let dayRain8 = UIColor(red: 49.0/255.0, green: 70.0/255.0, blue: 151.0/255.0, alpha: 1.0)
-
     let nightDark1 = UIColor(red: 89.0/255.0, green: 94.0/255.0, blue: 101.0/255.0, alpha: 1.0)
     let nightDark2 = UIColor(red: 91.0/255.0, green: 86.0/255.0, blue: 103.0/255.0, alpha: 1.0)
     let nightDark3 = UIColor(red: 92.0/255.0, green: 78.0/255.0, blue: 105.0/255.0, alpha: 1.0)
@@ -89,8 +71,6 @@ class TextColor {
         
         let presunsetArray = [presunset1, presunset2, presunset3, presunset4, presunset5, presunset6, presunset7, presunset8]
         let postSunsetArray = [postSunset1, postSunset2, postSunset3, postSunset4, postSunset5, postSunset6, postSunset7, postSunset8]
-        let nightArray = [night1, night2, night3, night4, night5, night6, night7, night8]
-        let dayRainArray = [dayRain1, dayRain2, dayRain3, dayRain4, dayRain5, dayRain6, dayRain7, dayRain8]
         let nightDarkArray = [nightDark1, nightDark2, nightDark3, nightDark4, nightDark5, nightDark6, nightDark7, nightDark8]
 
         
@@ -109,7 +89,9 @@ class TextColor {
             }
             else {
                 timeOfDayIfCloudy = "night"
-                colorArray = nightArray
+                colorArray = ColorAlgorithm().getNewNightArray(weatherData: data)
+                print("IT IS THIS COLOR ARRAY")
+                //colorArray = nightArray
             }
         }
             // After sunset
@@ -120,7 +102,7 @@ class TextColor {
             }
             else {
                 timeOfDayIfCloudy = "night"
-                colorArray = nightArray
+                colorArray = ColorAlgorithm().getNewNightArray(weatherData: data)
             }
         }
             // Day time
@@ -143,7 +125,7 @@ class TextColor {
         
         if icon == "rain" || icon == "fog"{
             if timeOfDayIfCloudy == "day"{
-                colorArray = dayRainArray
+                colorArray = ColorAlgorithm().getRainArray(weatherData: data)
             }
             else{
                 colorArray = nightDarkArray
@@ -179,9 +161,9 @@ class TextColor {
             }
             else {
                 print("Morning night")
-                timeOfDayIfCloudy = "sunset"
-                backgoundColor = [night1.cgColor, night8.cgColor, white, navBarNight]
-            }
+                timeOfDayIfCloudy = "night"
+                let color = ColorAlgorithm().getNewNightArray(weatherData: data)
+                backgoundColor = [color[0].cgColor, color[7].cgColor, white, navBarNight]            }
             
         }
             
@@ -198,7 +180,8 @@ class TextColor {
             else {
                 print("night")
                 timeOfDayIfCloudy = "night"
-                backgoundColor = [night1.cgColor, night8.cgColor, white, navBarNight]
+                let color = ColorAlgorithm().getNewNightArray(weatherData: data)
+                backgoundColor = [color[0].cgColor, color[7].cgColor, white, navBarNight]
             }
         }
             
@@ -222,14 +205,18 @@ class TextColor {
                 let color = ColorAlgorithm().getNewColorArray(weatherData: data)
                 timeOfDayIfCloudy = "day"
                 backgoundColor = [color[0].cgColor, color[7].cgColor, white, navBarDay]
-          
+                print("day background")
+                
             }
             
         }
         
         if icon == "rain"{
             if timeOfDayIfCloudy == "day"{
-                backgoundColor = [dayRain1.cgColor, dayRain8.cgColor, white, navBarDayRain]
+                let color = ColorAlgorithm().getRainArray(weatherData: data)
+                backgoundColor = [color[0].cgColor,color[7].cgColor, white, navBarDayRain]
+                print("rain background")
+                print(data.getRainIntensity())
             }
             else{
                 backgoundColor = [nightDark1.cgColor, nightDark8.cgColor, white, navBarNightDark]

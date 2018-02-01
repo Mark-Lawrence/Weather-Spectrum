@@ -14,8 +14,8 @@ class WeatherUpdater{
     
     let weather = WeatherGetter()
     var viewController: ViewController?
-    var hourlyController: HourlyViewController?
-    var weeklyController: WeeklyViewController?
+    //var hourlyController: HourlyViewController?
+    //var weeklyController: WeeklyViewController?
     var currentlyController: CurrentlyViewController?
     var cityListTableController: CityListTableController?
     var currentLocationController: CurrentLocationController?
@@ -26,20 +26,20 @@ class WeatherUpdater{
         WeatherGetter.sharedInstance.getViewController(viewController: viewController)
     }
     
-    func setHourlyController(hourlyController: HourlyViewController) {
-        self.hourlyController = hourlyController
-        WeatherGetter.sharedInstance.getHourlyController(hourlyController: hourlyController)
-    }
-    
-    func setWeeklyController(weeklyController: WeeklyViewController) {
-        self.weeklyController = weeklyController
-        WeatherGetter.sharedInstance.setWeeklyController(weeklyController: weeklyController)
-    }
-    
-    func setCurrentlyController(currentlyController: CurrentlyViewController) {
-        self.currentlyController = currentlyController
-        WeatherGetter.sharedInstance.getCurrentlyController(currentlyController: currentlyController)
-    }
+//    func setHourlyController(hourlyController: HourlyViewController) {
+//        self.hourlyController = hourlyController
+//        WeatherGetter.sharedInstance.getHourlyController(hourlyController: hourlyController)
+//    }
+//    
+//    func setWeeklyController(weeklyController: WeeklyViewController) {
+//        self.weeklyController = weeklyController
+//        WeatherGetter.sharedInstance.setWeeklyController(weeklyController: weeklyController)
+//    }
+//
+//    func setCurrentlyController(currentlyController: CurrentlyViewController) {
+//        self.currentlyController = currentlyController
+//        WeatherGetter.sharedInstance.getCurrentlyController(currentlyController: currentlyController)
+//    }
     
     func setcityListTableController(cityListTableController: CityListTableController) {
         self.cityListTableController = cityListTableController

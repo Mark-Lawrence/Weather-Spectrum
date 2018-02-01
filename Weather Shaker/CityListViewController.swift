@@ -13,6 +13,7 @@ class CityListViewController: ViewControllerPannable {
 
    
     
+    @IBOutlet weak var dragDownImageView: UIImageView!
     @IBOutlet weak var boarderView: UIView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var editButton: UIButton!
@@ -28,9 +29,13 @@ class CityListViewController: ViewControllerPannable {
         let colorConverter = UIColor(cgColor: darkColor!)
         addLabel.textColor = colorConverter
         
+    
+        dragDownArrow = dragDownImageView
         
         containerView.layer.cornerRadius = 7
         // Do any additional setup after loading the view.
+        
+        
     }
     
    

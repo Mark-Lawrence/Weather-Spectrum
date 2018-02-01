@@ -42,11 +42,14 @@ class CurrentlyViewController: UIViewController {
     
     @IBOutlet weak var navBar: UIView!
     @IBOutlet weak var iconImage: UIImageView!
-
+    let uiColors = TextColor()
     
     static let sharedInstance = CurrentlyViewController()
     var cityName = ""
+    
     var textColor = [UIColor]()
+    var data: forcastData?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,10 +65,11 @@ class CurrentlyViewController: UIViewController {
             }
         }
 
+        updateLabels()
         
-        WeatherGetter.sharedInstance.currentlyControllerDidLoad()
-        WeatherUpdater.sharedInstance.setCurrentlyController(currentlyController: self)
-        WeatherGetter.sharedInstance.updateCurrently()
+//        WeatherGetter.sharedInstance.currentlyControllerDidLoad()
+//        WeatherUpdater.sharedInstance.setCurrentlyController(currentlyController: self)
+//        WeatherGetter.sharedInstance.updateCurrently()
         
         
         // Do any additional setup after loading the view.
@@ -77,23 +81,20 @@ class CurrentlyViewController: UIViewController {
     }
     
     
-    func updateLabels(data: forcastData) {
-        let uiColors = TextColor()
-        let currentTime = Date(timeIntervalSince1970: Double (Date().timeIntervalSince1970))
-        let textColor = uiColors.getColorTextArray(data: data, currentTime: currentTime)
-        
-        backButtonLabel.text = data.getCityName()
-        temperatureLabel.text = data.getTemperature()
-        windLabel.text = data.getWindSpeed()
-        humidityLabel.text = data.getHumidity()
-        pressureLabel.text = data.getPressure()
-        sunriseLabel.text = data.getSunrise()
-        sunsetLabel.text = data.getSunset()
-        conditionLabel.text = data.getCurrentCondition()
-        feelsLikeLabel.text = data.getFeelsLike()
-        dewPointLabel.text = data.getDewPoint()
-        smartSummary.text = data.getSmartSummary()
-        UVIndexLabel.text = data.getUVIndex()
+    func updateLabels() {
+       
+        backButtonLabel.text = data!.getCityName()
+        temperatureLabel.text = data!.getTemperature()
+        windLabel.text = data!.getWindSpeed()
+        humidityLabel.text = data!.getHumidity()
+        pressureLabel.text = data!.getPressure()
+        sunriseLabel.text = data!.getSunrise()
+        sunsetLabel.text = data!.getSunset()
+        conditionLabel.text = data!.getCurrentCondition()
+        feelsLikeLabel.text = data!.getFeelsLike()
+        dewPointLabel.text = data!.getDewPoint()
+        smartSummary.text = data!.getSmartSummary()
+        UVIndexLabel.text = data!.getUVIndex()
        
         currentlyText.textColor = textColor[7]
         feelsLikeText.textColor = textColor[0]
@@ -110,7 +111,7 @@ class CurrentlyViewController: UIViewController {
         navBar.layer.shadowOffset = CGSize.zero
         navBar.layer.shadowRadius = 12
                 
-        iconImage.image = uiColors.updateIcon(data: data.getIcon(), sevenDay: false)
+        iconImage.image = uiColors.updateIcon(data: data!.getIcon(), sevenDay: false)
     }
     
     
