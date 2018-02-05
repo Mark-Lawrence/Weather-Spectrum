@@ -157,6 +157,13 @@ struct forcastData {
     func getLastUpdatedTime() -> String {
         return String (getFormatedTime(timeToFormat: lastTimeUpdated, dateFormatType: "EEEE, MMMM d", timeZoneSupprt: true))
     }
+    
+    func getLastTimeUpdatedUnformated() -> Date {
+        let date = Date(timeIntervalSince1970: Double (lastTimeUpdated))
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: timeZone*3600) //Set timezone that you want
+        return date
+    }
+    
     func getLastUpdatedTimeAlert() -> String {
         return String (getFormatedTime(timeToFormat: lastTimeUpdated, dateFormatType: "MMMM d, h:mm a", timeZoneSupprt: true))
     }

@@ -167,7 +167,11 @@ class AboutViewController: UIViewController {
     @IBAction func didPressPoweredBy(_ sender: Any) {
 //        let url = URL(fileURLWithPath: "https://darksky.net/poweredby/")
 //        UIApplication.shared.open(url, options: [:])
-    UIApplication.shared.openURL(URL(string: "https://darksky.net/poweredby/")!)
+    //UIApplication.shared.openURL(URL(string: "https://darksky.net/poweredby/")!)
+        let url = "https://darksky.net/poweredby/"
+        if let url = URL(string: url) {
+            UIApplication.shared.open(url, options: [:])
+        }
     }
     
     private func saveSettings() {

@@ -123,7 +123,7 @@ class TextColor {
             }
         }
         
-        if icon == "rain" || icon == "fog"{
+        if icon == "rain"{
             if timeOfDayIfCloudy == "day"{
                 colorArray = ColorAlgorithm().getRainArray(weatherData: data)
             }

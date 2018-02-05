@@ -199,7 +199,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     func updateLabels(data: forcastData) {
         
         //get new colors
+        
         let currentTime = Date(timeIntervalSince1970: Double (Date().timeIntervalSince1970))
+        print ("Current time: \(currentTime)")
+        print("Current time: \(data.getLastTimeUpdatedUnformated())")
+        
         textColorArray = uiColors.getColorTextArray(data: data, currentTime: currentTime)
         
         
