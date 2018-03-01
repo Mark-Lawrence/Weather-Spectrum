@@ -32,7 +32,6 @@ class ColorAlgorithm{
     func getNewColorArray(weatherData: forcastData) ->[UIColor]{
         getNewTemp(temperature: weatherData.getTemp())
         getNewCloudCoverage(cloudCoverage: weatherData.getCloudCoverage())
-        print("HUE \(hue)   Saturation \(saturation)")
         initalColorArray = [hue/100, saturation/100, brightness/100]
         return createArrayDay(initialColor: initalColorArray)
     }
@@ -61,13 +60,6 @@ class ColorAlgorithm{
         saturation = 14.0
         brightness = Double(84 - (17*rainIntensity))
         
-        print(hue)
-        print(saturation)
-        print(brightness)
-        
-        print(hue + 0.029*360)
-        print(saturation + 60.9)
-        print(brightness-11.375)
         
         initalColorArray = [hue/360, saturation/100, brightness/100]
 
@@ -103,7 +95,7 @@ class ColorAlgorithm{
     }
     
     func getNewCloudCoverage(cloudCoverage: Double) {
-        print("CLOUD COVERAGE \(cloudCoverage)")
+        
         let cloud = Double(cloudCoverage)/1.15
         saturation = tempSaturation * (1 - (0.75*cloud))
         brightness = tempBrightness * (1 - (0.25*cloud))

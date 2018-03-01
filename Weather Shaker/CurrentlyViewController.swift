@@ -83,7 +83,7 @@ class CurrentlyViewController: UIViewController {
     
     func updateLabels() {
        
-        backButtonLabel.text = data!.getCityName()
+        //backButtonLabel.text = data!.getCityName()
         temperatureLabel.text = data!.getTemperature()
         windLabel.text = data!.getWindSpeed()
         humidityLabel.text = data!.getHumidity()

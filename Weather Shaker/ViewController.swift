@@ -74,6 +74,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     @IBOutlet weak var updateSpinner: UIActivityIndicatorView!
     
     var weatherUpdater = WeatherUpdater()
+    var appHasFullyLoaded = false
 
     
     func loadCurrentlyApp() {
@@ -112,7 +113,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         
         
         WeatherUpdater.sharedInstance.setViewController(viewController: self)
-        print("load current")
+        print("load view controller")
     }
     
 
@@ -201,8 +202,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         //get new colors
         
         let currentTime = Date(timeIntervalSince1970: Double (Date().timeIntervalSince1970))
-        print ("Current time: \(currentTime)")
-        print("Current time: \(data.getLastTimeUpdatedUnformated())")
         
         textColorArray = uiColors.getColorTextArray(data: data, currentTime: currentTime)
         
@@ -245,6 +244,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         updateSpinner.isHidden = true
         
         self.tableView.reloadData()
+        appHasFullyLoaded = true
     }
     
     func updateWarningUI(data: forcastData) {
@@ -255,7 +255,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         
         
         if (data.getAlerts().count == 0) || ((userSettings.getWarnings() == "false") && (userSettings.getAdvisories() == "false") && (userSettings.getWatches() == "false")){
-            print("There are no warnings or user doesn't want to see them")
+            //print("There are no warnings or user doesn't want to see them")
             warningView.isHidden = true
             cityNameWidth.constant = screenSize.width-50
         }
@@ -519,22 +519,33 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
             let controller = segue.destination as! HourlyViewController
             controller.textColor = textColorArray
             controller.data = weatherData!
+            let backItem = UIBarButtonItem()
+            backItem.title = weatherData?.getCityName()
+            navigationItem.backBarButtonItem = backItem
         }
         
         if segue.identifier == "toWeekly"{
             let controller = segue.destination as! WeeklyViewController
             controller.textColor = textColorArray
             controller.data = weatherData!
+            let backItem = UIBarButtonItem()
+            backItem.title = weatherData?.getCityName()
+            navigationItem.backBarButtonItem = backItem
             
         }
         
         if segue.identifier == "toCurrently"{
             let controller = segue.destination as! CurrentlyViewController
+            let backItem = UIBarButtonItem()
+            backItem.title = weatherData?.getCityName()
+            navigationItem.backBarButtonItem = backItem
             controller.textColor = textColorArray
             controller.data = weatherData!
         }
         if (segue.identifier == "toSettings") {
-            
+            let backItem = UIBarButtonItem()
+            backItem.title = weatherData?.getCityName()
+            navigationItem.backBarButtonItem = backItem
             let controller = segue.destination as! AboutViewController
             controller.cityName = cityName
         }

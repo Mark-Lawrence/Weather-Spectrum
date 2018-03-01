@@ -683,7 +683,24 @@
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HMg-JB-cXH">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.24684289383561644" colorSpace="calibratedRGB"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="1sp-1Q-vrp">
+                                        <rect key="frame" x="177" y="409" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iTunes " translatesAutoresizingMaskIntoConstraints="NO" id="mG3-Ia-qT7">
+                                        <rect key="frame" x="112" y="166" width="150" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="3kX-af-meQ"/>
+                                            <constraint firstAttribute="height" constant="150" id="5Ue-dP-vFj"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="mG3-Ia-qT7" firstAttribute="leading" secondItem="HMg-JB-cXH" secondAttribute="leading" constant="112" id="ECY-fv-TkO"/>
+                                    <constraint firstItem="mG3-Ia-qT7" firstAttribute="top" secondItem="HMg-JB-cXH" secondAttribute="top" constant="166" id="oQm-2Z-5bH"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1106,7 +1123,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="City Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsm-pr-lRB">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsm-pr-lRB">
                                             <rect key="frame" x="27" y="31" width="292" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1114,6 +1131,11 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <variation key="default">
+                                        <mask key="subviews">
+                                            <exclude reference="vsm-pr-lRB"/>
+                                        </mask>
+                                    </variation>
                                 </view>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="112" id="8z5-H5-8UX"/>
@@ -1301,7 +1323,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="112"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="City Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fj1-qW-l5k">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fj1-qW-l5k">
                                             <rect key="frame" x="27" y="31" width="292" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1316,6 +1338,11 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <variation key="default">
+                                        <mask key="subviews">
+                                            <exclude reference="fj1-qW-l5k"/>
+                                        </mask>
+                                    </variation>
                                 </view>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="112" id="XaV-8s-16l"/>
@@ -1408,6 +1435,11 @@
                                     <constraint firstItem="Xfh-Yr-oIi" firstAttribute="leading" secondItem="iri-pC-g4B" secondAttribute="leading" constant="15" id="i1f-tH-utz"/>
                                     <constraint firstItem="Rbw-7K-nbs" firstAttribute="top" secondItem="iri-pC-g4B" secondAttribute="top" constant="31" id="yfN-Ou-ez1"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="Rbw-7K-nbs"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iTunes " translatesAutoresizingMaskIntoConstraints="NO" id="NXS-FI-bu6">
                                 <rect key="frame" x="71" y="345" width="232" height="232"/>
@@ -1788,7 +1820,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b8P-ht-cNK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="nLJ-Lr-lSb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-327.19999999999999" y="-1712.2938530734634"/>
+            <point key="canvasLocation" x="-164" y="-1735"/>
         </scene>
         <!--CIty List-->
         <scene sceneID="TkM-0A-XEL">
@@ -1853,7 +1885,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oJj-i9-YlO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="E7D-d0-mMT" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="389" y="-1635"/>
+            <point key="canvasLocation" x="594" y="-1635"/>
         </scene>
         <!--Current Location Controller-->
         <scene sceneID="DS8-M1-EZy">
@@ -1932,7 +1964,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9q8-wz-9zb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="0Qq-cZ-IUb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="985" y="-1798"/>
+            <point key="canvasLocation" x="1249" y="-1735"/>
         </scene>
         <!--Currently View Controller-->
         <scene sceneID="ZEJ-XD-mEq">
@@ -1959,7 +1991,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="City Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHa-Lf-gaf">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHa-Lf-gaf">
                                         <rect key="frame" x="27" y="31" width="200" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="3RT-fF-ogY"/>

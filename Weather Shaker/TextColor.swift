@@ -72,7 +72,13 @@ class TextColor {
         let presunsetArray = [presunset1, presunset2, presunset3, presunset4, presunset5, presunset6, presunset7, presunset8]
         let postSunsetArray = [postSunset1, postSunset2, postSunset3, postSunset4, postSunset5, postSunset6, postSunset7, postSunset8]
         let nightDarkArray = [nightDark1, nightDark2, nightDark3, nightDark4, nightDark5, nightDark6, nightDark7, nightDark8]
-
+//
+//        print ("CURRENT TIME: \(currentTime.timeIntervalSince1970)")
+//        print("sunset time: \(sunsetTime.timeIntervalSince1970)")
+//        print("sunrise time: \(sunriseTime.timeIntervalSince1970)")
+//        
+//        print("time since sunrise : \(currentTime.timeIntervalSince(sunriseTime))")
+//        print("time since sunset : \(currentTime.timeIntervalSince(sunsetTime))")
         
         let calender:Calendar = Calendar.current
         let componentsNight: DateComponents = calender.dateComponents([.year, .month, .day, .hour, .minute, .second], from: currentTime, to: sunsetTime)
@@ -90,8 +96,6 @@ class TextColor {
             else {
                 timeOfDayIfCloudy = "night"
                 colorArray = ColorAlgorithm().getNewNightArray(weatherData: data)
-                print("IT IS THIS COLOR ARRAY")
-                //colorArray = nightArray
             }
         }
             // After sunset
@@ -119,7 +123,6 @@ class TextColor {
             else {
                 timeOfDayIfCloudy = "day"
                 colorArray = ColorAlgorithm().getNewColorArray(weatherData: data)
-                //colorArray = dayArray
             }
         }
         
@@ -148,6 +151,16 @@ class TextColor {
         let componentsNight: DateComponents = calender.dateComponents([.year, .month, .day, .hour, .minute, .second], from: currentTime, to: sunsetTime)
         let componentsMorning: DateComponents = calender.dateComponents([.year, .month, .day, .hour, .minute, .second], from: currentTime, to: sunriseTime)
         
+        
+//        print("components morning seconds \(componentsMorning.second!)")
+//        print("components night seconds \(componentsNight.second!)")
+//
+//        print("components morning minutes \(componentsMorning.minute!)")
+//        print("components night hour \(componentsNight.hour!)")
+//
+//        print("components night minutes \(componentsNight.minute!)")
+//        print("components night hour \(componentsNight.hour!)")
+//
         
         //Before Sunrise
         if componentsMorning.second! > 0 && componentsNight.second! > 0 {
@@ -216,7 +229,6 @@ class TextColor {
                 let color = ColorAlgorithm().getRainArray(weatherData: data)
                 backgoundColor = [color[0].cgColor,color[7].cgColor, white, navBarDayRain]
                 print("rain background")
-                print(data.getRainIntensity())
             }
             else{
                 backgoundColor = [nightDark1.cgColor, nightDark8.cgColor, white, navBarNightDark]

@@ -127,6 +127,7 @@ class WeatherGetter: UIView {
                     rainIntensity = weather["currently"]!["precipIntensity"]!! as! Double
                     
                     print("Rain intensity: \(rainIntensity)")
+                    print("CLOUD COVERAGE \(cloudCoverage)")
                     
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? [String : AnyObject]
                     
