@@ -458,6 +458,7 @@ class Alert {
             dateFormatter.timeZone = TimeZone(secondsFromGMT: timeZone*3600) //Set timezone that you want
         }
         
+        
         dateFormatter.locale = NSLocale.current
         dateFormatter.dateFormat = dateFormatType //Specify your format that you want
         

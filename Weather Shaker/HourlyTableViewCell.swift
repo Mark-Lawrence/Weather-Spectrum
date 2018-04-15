@@ -15,18 +15,20 @@ class HourlyTableViewCell: UITableViewCell {
     @IBOutlet weak var chanceRainLabel: UILabel!
     @IBOutlet weak var dayOfWeekLabel: UILabel!
     @IBOutlet weak var currentLabel: UILabel!
-  
-
+    @IBOutlet weak var cellView: UIView!
+    
+    @IBOutlet weak var animatedView: UIView!
     @IBOutlet weak var iconImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        animatedView.layer.cornerRadius = 7
+        animatedView.layer.opacity = 0.75
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 

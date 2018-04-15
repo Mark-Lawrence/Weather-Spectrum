@@ -2,7 +2,41 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>LSApplicationCategoryType</key>
+	<key>   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -&gt; Bool {
+        // Override point for customization after application launch.
+        var shouldPerformAdditionalDelegateHandling = true
+
+        // If a shortcut was launched, display its information and take the appropriate action.
+        if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
+            
+            launchedShortcutItem = shortcutItem
+            
+            // This will block "performActionForShortcutItem:completionHandler" from being called.
+            shouldPerformAdditionalDelegateHandling = false
+        }
+
+        // Install initial versions of our two extra dynamic shortcuts.
+        if let shortcutItems = application.shortcutItems, shortcutItems.isEmpty {
+			// Construct dynamic short item #3
+            let shortcut3UserInfo = [AppDelegate.applicationShortcutUserInfoIconKey: UIApplicationShortcutIconType.play.rawValue]
+			let shortcut3 = UIMutableApplicationShortcutItem(type: ShortcutIdentifier.third.type,
+															 localizedTitle: "Play",
+															 localizedSubtitle: "Will Play an item",
+															 icon: UIApplicationShortcutIcon(type: .play),
+															 userInfo: shortcut3UserInfo)
+			// Construct dynamic short #4
+			let shortcut4UserInfo = [AppDelegate.applicationShortcutUserInfoIconKey: UIApplicationShortcutIconType.pause.rawValue]
+			let shortcut4 = UIMutableApplicationShortcutItem(type: ShortcutIdentifier.fourth.type,
+															 localizedTitle: "Pause",
+															 localizedSubtitle: "Will Pause an item",
+															 icon: UIApplicationShortcutIcon(type: .pause),
+															 userInfo: shortcut4UserInfo)
+            
+            // Update the application providing the initial 'dynamic' shortcut items.
+            application.shortcutItems = [shortcut3, shortcut4]
+        }
+        
+</key>
 	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
@@ -21,7 +55,9 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>7</string>
+	<string>8</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -43,41 +79,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -&gt; Bool {
-        // Override point for customization after application launch.
-        var shouldPerformAdditionalDelegateHandling = true
-
-        // If a shortcut was launched, display its information and take the appropriate action.
-        if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
-            
-            launchedShortcutItem = shortcutItem
-            
-            // This will block &quot;performActionForShortcutItem:completionHandler&quot; from being called.
-            shouldPerformAdditionalDelegateHandling = false
-        }
-
-        // Install initial versions of our two extra dynamic shortcuts.
-        if let shortcutItems = application.shortcutItems, shortcutItems.isEmpty {
-			// Construct dynamic short item #3
-            let shortcut3UserInfo = [AppDelegate.applicationShortcutUserInfoIconKey: UIApplicationShortcutIconType.play.rawValue]
-			let shortcut3 = UIMutableApplicationShortcutItem(type: ShortcutIdentifier.third.type,
-															 localizedTitle: &quot;Play&quot;,
-															 localizedSubtitle: &quot;Will Play an item&quot;,
-															 icon: UIApplicationShortcutIcon(type: .play),
-															 userInfo: shortcut3UserInfo)
-			// Construct dynamic short #4
-			let shortcut4UserInfo = [AppDelegate.applicationShortcutUserInfoIconKey: UIApplicationShortcutIconType.pause.rawValue]
-			let shortcut4 = UIMutableApplicationShortcutItem(type: ShortcutIdentifier.fourth.type,
-															 localizedTitle: &quot;Pause&quot;,
-															 localizedSubtitle: &quot;Will Pause an item&quot;,
-															 icon: UIApplicationShortcutIcon(type: .pause),
-															 userInfo: shortcut4UserInfo)
-            
-            // Update the application providing the initial &apos;dynamic&apos; shortcut items.
-            application.shortcutItems = [shortcut3, shortcut4]
-        }
-        
-</key>
-	<string></string>
 </dict>
 </plist>

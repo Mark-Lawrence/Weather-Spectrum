@@ -23,6 +23,7 @@ class CityListTableController: UITableViewController {
     var currentLocationCityList: CityList?
     var currentLocationController: CurrentLocationController?
     var currentCity = ""
+    var newIndexPath: IndexPath!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,6 +140,7 @@ class CityListTableController: UITableViewController {
     // MARK: - Navigation
 
     @IBAction func unwindToCityList(sender: UIStoryboardSegue) {
+        newIndexPath = IndexPath(row: 0, section: 0)
         if let sourceViewController = sender.source as? AddCityController, let newCity = sourceViewController.newCity {
             
             var isDuplicate = false
@@ -147,11 +149,12 @@ class CityListTableController: UITableViewController {
                 for index in 0...(cityList.count - 1) {
                     if newCity.getCityName() == cityList[index].getCityName() {
                         isDuplicate = true
+                        newIndexPath = IndexPath(row: index, section: 0)
                     }
                 }
             }
             if isDuplicate == false {
-                let newIndexPath = IndexPath(row: cityList.count, section: 0)
+                newIndexPath = IndexPath(row: cityList.count, section: 0)
                 cityList.append(newCity)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
@@ -164,15 +167,17 @@ class CityListTableController: UITableViewController {
         
         if let sourceViewController = sender.source as? CurrentLocationController, let newCity = sourceViewController.newCity, let viewController = sourceViewController.viewController {
             
-            let newIndexPath = IndexPath(row: cityList.count, section: 0)
+            newIndexPath = IndexPath(row: cityList.count, section: 0)
+            
             
             viewController.addToListButton.isEnabled = false
             cityList.append(newCity)
             tableView.insertRows(at: [newIndexPath], with: .automatic)
             
-            
+    
         }
         // Save the city.
+        tableView.scrollToRow(at: newIndexPath, at: .top, animated: false)
         saveCityList()
     }
     

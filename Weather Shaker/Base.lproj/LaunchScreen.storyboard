@@ -24,23 +24,16 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SVZ-3j-nNz">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="701"/>
                                 <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="jcC-l8-ZGB">
-                                        <rect key="frame" x="177" y="443" width="20" height="20"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="iTunes " translatesAutoresizingMaskIntoConstraints="NO" id="3pt-Cn-eb5">
+                                        <rect key="frame" x="112" y="166" width="150" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="AB0-x5-czf">
+                                        <rect key="frame" x="177" y="470" width="20" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </activityIndicatorView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iTunes " translatesAutoresizingMaskIntoConstraints="NO" id="3pt-Cn-eb5">
-                                        <rect key="frame" x="112" y="166" width="150" height="150"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="150" id="Ud8-de-ZBQ"/>
-                                            <constraint firstAttribute="width" constant="150" id="doi-gV-VKj"/>
-                                        </constraints>
-                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="3pt-Cn-eb5" firstAttribute="top" secondItem="SVZ-3j-nNz" secondAttribute="top" constant="166" id="0bl-pV-LKZ"/>
-                                    <constraint firstItem="3pt-Cn-eb5" firstAttribute="leading" secondItem="SVZ-3j-nNz" secondAttribute="leading" constant="112" id="Q3a-sq-rjX"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

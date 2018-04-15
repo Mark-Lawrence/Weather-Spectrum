@@ -22,6 +22,7 @@
 		5F647AB91F0426560066BAF1 /* CurrentSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F647AB81F0426560066BAF1 /* CurrentSummaryCell.swift */; };
 		5F647ABC1F04271B0066BAF1 /* HourlySummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F647ABB1F04271B0066BAF1 /* HourlySummaryCell.swift */; };
 		5F647ABF1F04273A0066BAF1 /* WeeklySummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F647ABE1F04273A0066BAF1 /* WeeklySummaryCell.swift */; };
+		5F75593C207FB2140060CED5 /* ForceGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75593B207FB2140060CED5 /* ForceGestureRecognizer.swift */; };
 		5F7C80221F08246F0052C538 /* TextColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C80211F08246F0052C538 /* TextColor.swift */; };
 		5FAD44251EF440AB006CD90C /* AddCityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAD44241EF440AB006CD90C /* AddCityController.swift */; };
 		5FC53C1E1EECF83D00AC3013 /* WeatherUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC53C1D1EECF83D00AC3013 /* WeatherUpdater.swift */; };
@@ -80,6 +81,7 @@
 		5F647AB81F0426560066BAF1 /* CurrentSummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentSummaryCell.swift; sourceTree = "<group>"; };
 		5F647ABB1F04271B0066BAF1 /* HourlySummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourlySummaryCell.swift; sourceTree = "<group>"; };
 		5F647ABE1F04273A0066BAF1 /* WeeklySummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeeklySummaryCell.swift; sourceTree = "<group>"; };
+		5F75593B207FB2140060CED5 /* ForceGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceGestureRecognizer.swift; sourceTree = "<group>"; };
 		5F7C80211F08246F0052C538 /* TextColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextColor.swift; sourceTree = "<group>"; };
 		5F7E75EA1F27D17200EAFE27 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "Weather Shaker/GoogleMobileAds.framework"; sourceTree = "<group>"; };
 		5FAD44241EF440AB006CD90C /* AddCityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCityController.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				5F647AB81F0426560066BAF1 /* CurrentSummaryCell.swift */,
 				5F647ABB1F04271B0066BAF1 /* HourlySummaryCell.swift */,
 				5F647ABE1F04273A0066BAF1 /* WeeklySummaryCell.swift */,
+				5FF30EC81F13118700C5963A /* SettingsTableViewCell.swift */,
 			);
 			name = "Table View Cells";
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 			children = (
 				5FE499221EEB9EC9000BF01C /* HourlyViewController.swift */,
 				5FC53C241EEF61D800AC3013 /* HourlyTableViewCell.swift */,
+				5F75593B207FB2140060CED5 /* ForceGestureRecognizer.swift */,
 			);
 			name = Hourly;
 			sourceTree = "<group>";
@@ -250,7 +254,6 @@
 				5F647AB11F0340E80066BAF1 /* Currently */,
 				5F647AB31F03F9E20066BAF1 /* ViewController */,
 				5FF047A91EE099F600BED385 /* AppDelegate.swift */,
-				5FF30EC81F13118700C5963A /* SettingsTableViewCell.swift */,
 				5FF047AD1EE099F600BED385 /* Main.storyboard */,
 				5FF047B21EE099F600BED385 /* LaunchScreen.storyboard */,
 				5FC53C321EF0C56F00AC3013 /* AboutViewController.swift */,
@@ -347,6 +350,7 @@
 				5F647AB91F0426560066BAF1 /* CurrentSummaryCell.swift in Sources */,
 				5FF047BC1EE09B9400BED385 /* WeatherGetter.swift in Sources */,
 				5F64456E20127DD80091CA27 /* AlertViewController.swift in Sources */,
+				5F75593C207FB2140060CED5 /* ForceGestureRecognizer.swift in Sources */,
 				5FF047AA1EE099F600BED385 /* AppDelegate.swift in Sources */,
 				5FC53C2F1EF07B9700AC3013 /* WeeklyTableViewCell.swift in Sources */,
 				5F647AB01F03317D0066BAF1 /* ViewController.swift in Sources */,

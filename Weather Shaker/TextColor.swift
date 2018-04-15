@@ -72,13 +72,7 @@ class TextColor {
         let presunsetArray = [presunset1, presunset2, presunset3, presunset4, presunset5, presunset6, presunset7, presunset8]
         let postSunsetArray = [postSunset1, postSunset2, postSunset3, postSunset4, postSunset5, postSunset6, postSunset7, postSunset8]
         let nightDarkArray = [nightDark1, nightDark2, nightDark3, nightDark4, nightDark5, nightDark6, nightDark7, nightDark8]
-//
-//        print ("CURRENT TIME: \(currentTime.timeIntervalSince1970)")
-//        print("sunset time: \(sunsetTime.timeIntervalSince1970)")
-//        print("sunrise time: \(sunriseTime.timeIntervalSince1970)")
-//        
-//        print("time since sunrise : \(currentTime.timeIntervalSince(sunriseTime))")
-//        print("time since sunset : \(currentTime.timeIntervalSince(sunsetTime))")
+
         
         let calender:Calendar = Calendar.current
         let componentsNight: DateComponents = calender.dateComponents([.year, .month, .day, .hour, .minute, .second], from: currentTime, to: sunsetTime)
@@ -145,28 +139,17 @@ class TextColor {
         let sunsetTime = data.getSunsetTime()
         let icon = data.getIcon()
         var timeOfDayIfCloudy = ""
-
-        let currentTime = Date(timeIntervalSince1970: Double (Date().timeIntervalSince1970))
-        let calender:Calendar = Calendar.current
-        let componentsNight: DateComponents = calender.dateComponents([.year, .month, .day, .hour, .minute, .second], from: currentTime, to: sunsetTime)
-        let componentsMorning: DateComponents = calender.dateComponents([.year, .month, .day, .hour, .minute, .second], from: currentTime, to: sunriseTime)
         
+        print(sunriseTime.timeIntervalSinceNow)
+        print(sunsetTime.timeIntervalSinceNow)
+        //print(currentTime.timeIntervalSinceNow)
         
-//        print("components morning seconds \(componentsMorning.second!)")
-//        print("components night seconds \(componentsNight.second!)")
-//
-//        print("components morning minutes \(componentsMorning.minute!)")
-//        print("components night hour \(componentsNight.hour!)")
-//
-//        print("components night minutes \(componentsNight.minute!)")
-//        print("components night hour \(componentsNight.hour!)")
-//
         
         //Before Sunrise
-        if componentsMorning.second! > 0 && componentsNight.second! > 0 {
+        if sunriseTime.timeIntervalSinceNow > 0 {
             print("Early morning")
             
-            if componentsMorning.minute! < 30 && componentsMorning.hour! == 0 {
+            if sunriseTime.timeIntervalSinceNow < 1800 {
                 print("30 min before sunrise")
                 timeOfDayIfCloudy = "sunset"
                 backgoundColor = [postSunset1.cgColor, postSunset8.cgColor, white, navBarSunPost]
@@ -176,13 +159,14 @@ class TextColor {
                 print("Morning night")
                 timeOfDayIfCloudy = "night"
                 let color = ColorAlgorithm().getNewNightArray(weatherData: data)
-                backgoundColor = [color[0].cgColor, color[7].cgColor, white, navBarNight]            }
+                backgoundColor = [color[0].cgColor, color[7].cgColor, white, navBarNight]
+            }
             
         }
             
             // After sunset
-        else if componentsMorning.second! < 0 && componentsNight.second! < 0 {
-            if componentsNight.minute! > -30 && componentsNight.hour! == 0{
+        else if sunsetTime.timeIntervalSinceNow < 0 {
+            if sunsetTime.timeIntervalSinceNow > -1800 {
                 print("30 min after sunset")
                 timeOfDayIfCloudy = "sunset"
                 backgoundColor = [postSunset1.cgColor, postSunset8.cgColor, white, navBarSunPost]
@@ -201,13 +185,13 @@ class TextColor {
             // Day time
         else {
             
-            if componentsNight.minute! < 30 && componentsNight.hour! == 0 && componentsNight.second! > 0 {
+            if sunsetTime.timeIntervalSinceNow < 1800 {
                 print("30 min before Sunset")
                 timeOfDayIfCloudy = "sunset"
                 backgoundColor = [presunset1.cgColor, presunset8.cgColor, white, navBarSun]
             }
                 
-            else if componentsMorning.minute! > -30 && componentsMorning.hour! == 0{
+            else if sunriseTime.timeIntervalSinceNow > -1800 {
                 print("30 min after sunrise")
                 timeOfDayIfCloudy = "sunset"
                 backgoundColor = [presunset1.cgColor, presunset8.cgColor, white, navBarSun]

@@ -134,7 +134,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         }
         
         // here we instantiate an object of gesture recognizer
-        let gestureRec = UITapGestureRecognizer(target: self, action:  #selector (self.goToAlertView (_:)))
+        let gestureRec = UITapGestureRecognizer(target: self, action:  #selector (self.goToAlertView))
         // here we add it to our custom view
         warningView.addGestureRecognizer(gestureRec)
         warningView.layer.cornerRadius = 7
@@ -198,16 +198,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     
     
     func updateLabels(data: forcastData) {
-        
-        //get new colors
+     
         
         let currentTime = Date(timeIntervalSince1970: Double (Date().timeIntervalSince1970))
         
         textColorArray = uiColors.getColorTextArray(data: data, currentTime: currentTime)
         
         
-        //Makes sure user wants to see the warnings
-    
         updateWarningUI(data: data)
         
         cityNameLabel.text = data.getCityName()
@@ -489,12 +486,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         return NSKeyedUnarchiver.unarchiveObject(withFile: Settings.ArchiveURL.path) as? Settings
     }
     
-    func goToAlertView(_ sender:UITapGestureRecognizer){
+    func goToAlertView(sender:UITapGestureRecognizer){
         // this is the function that lets us perform the segue
-        performSegue(withIdentifier: "toAlertView", sender: self)
         UIView.animate(withDuration: 0.2) {
             self.warningView.backgroundColor = UIColor.lightGray
         }
+        
+        performSegue(withIdentifier: "toAlertView", sender: self)
+        
         UIView.animate(withDuration: 0.2) {
             self.warningView.backgroundColor = UIColor.white
         }
@@ -522,6 +521,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
             let backItem = UIBarButtonItem()
             backItem.title = weatherData?.getCityName()
             navigationItem.backBarButtonItem = backItem
+            controller.backgroundColorArray = backgroundColorArray
         }
         
         if segue.identifier == "toWeekly"{

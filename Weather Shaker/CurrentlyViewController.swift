@@ -28,6 +28,7 @@ class CurrentlyViewController: UIViewController {
     @IBOutlet weak var smartSummary: UILabel!
     @IBOutlet weak var backButtonLabel: UILabel!
     @IBOutlet weak var UVIndexLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
     
 
     @IBOutlet weak var feelsLikeText: UILabel!
@@ -64,7 +65,10 @@ class CurrentlyViewController: UIViewController {
                 temperatureLableBottom.constant = 5
             }
         }
-
+        
+        scrollView.isDirectionalLockEnabled = true
+        
+        
         updateLabels()
         
 //        WeatherGetter.sharedInstance.currentlyControllerDidLoad()
