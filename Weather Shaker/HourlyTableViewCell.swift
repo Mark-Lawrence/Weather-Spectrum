@@ -23,8 +23,9 @@ class HourlyTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        animatedView.layer.cornerRadius = 7
         animatedView.layer.opacity = 0.75
+        animatedView.layer.cornerRadius = 7
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

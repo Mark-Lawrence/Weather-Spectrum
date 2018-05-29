@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F16C52320BBBC3000E525EF /* CustomNavigationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F16C52220BBBC3000E525EF /* CustomNavigationAnimation.swift */; };
 		5F202AD91EF836D300D7FB22 /* CityListTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F202AD81EF836D300D7FB22 /* CityListTableController.swift */; };
 		5F202ADD1EF8684C00D7FB22 /* CurrentLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F202ADC1EF8684C00D7FB22 /* CurrentLocationController.swift */; };
 		5F2C65191EF33BE900FF3D89 /* CityList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2C65181EF33BE900FF3D89 /* CityList.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5F16C52220BBBC3000E525EF /* CustomNavigationAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationAnimation.swift; sourceTree = "<group>"; };
 		5F202AD81EF836D300D7FB22 /* CityListTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityListTableController.swift; sourceTree = "<group>"; };
 		5F202ADC1EF8684C00D7FB22 /* CurrentLocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentLocationController.swift; sourceTree = "<group>"; };
 		5F202ADF1EF868DB00D7FB22 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -200,6 +202,7 @@
 				5FE499221EEB9EC9000BF01C /* HourlyViewController.swift */,
 				5FC53C241EEF61D800AC3013 /* HourlyTableViewCell.swift */,
 				5F75593B207FB2140060CED5 /* ForceGestureRecognizer.swift */,
+				5F16C52220BBBC3000E525EF /* CustomNavigationAnimation.swift */,
 			);
 			name = Hourly;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				5F202ADD1EF8684C00D7FB22 /* CurrentLocationController.swift in Sources */,
 				5F7C80221F08246F0052C538 /* TextColor.swift in Sources */,
 				5F5C3D561EE398B500984DCD /* ForcastData.swift in Sources */,
+				5F16C52320BBBC3000E525EF /* CustomNavigationAnimation.swift in Sources */,
 				5F647ABC1F04271B0066BAF1 /* HourlySummaryCell.swift in Sources */,
 				5FC53C251EEF61D800AC3013 /* HourlyTableViewCell.swift in Sources */,
 				5F202AD91EF836D300D7FB22 /* CityListTableController.swift in Sources */,

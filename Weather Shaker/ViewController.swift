@@ -25,6 +25,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     var darkenBackground=UIView()
     var numberOfTimesCheckedForLocation = 0
     var tableSize: [[Int]] = [[1,2,3],[1]]
+    var navBarColors = [CGColor]()
     
     
     @IBOutlet weak var cityNameWidth: NSLayoutConstraint!
@@ -232,7 +233,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
         
         gradient.colors = [backgroundColorArray[0] , backgroundColorArray[1]]
         navBar.colors = [backgroundColorArray[2], backgroundColorArray[3]]
-        
+        navBarColors = [backgroundColorArray[2], backgroundColorArray[3]]
         dynamicBackground.layer.addSublayer(gradient)
         navigationBarBackground.layer.addSublayer(navBar)
         
@@ -522,6 +523,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
             backItem.title = weatherData?.getCityName()
             navigationItem.backBarButtonItem = backItem
             controller.backgroundColorArray = backgroundColorArray
+            controller.navBarColors = navBarColors
         }
         
         if segue.identifier == "toWeekly"{
