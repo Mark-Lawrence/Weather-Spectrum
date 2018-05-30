@@ -4,6 +4,7 @@ import UIKit
 class WeatherGetter: UIView {
     
     var weatherData: forcastData?
+    var hourlyMoreData: HourlyMoreData!
     var viewController: ViewController?
     //var hourlyController: HourlyViewController?
     //var weeklyController: WeeklyViewController?
@@ -82,10 +83,16 @@ class WeatherGetter: UIView {
                     var hourlyRainChance = [Double]()
                     var hourlyTemp = [Int]()
                     var hourlyPercipitationType = [String]()
-                    var hourlyWindSpeed = [Double]()
-                    var hourlyWindDirection = [Double]()
-                    var hourlyFeelsLike = [Int]()
                     
+                    var hourlySummary = [String]()
+                    var hourlyFeelsLike = [Int]()
+                    var houtlyHumidity = [Double]()
+                    var hourlyWindSpeed = [Double]()
+                    var hourlyWindGust = [Double]()
+                    var hourlyUVIndex = [Int]()
+                    var hourlyCloudCoverage = [Double]()
+                    var hourlyRainIntensity = [Double]()
+                    var hourlyVisibility = [Double]()
                     
                     var weeklyTime = [Int]()
                     var weeklyIcon = [String]()
@@ -163,14 +170,14 @@ class WeatherGetter: UIView {
                         hourlyTime.insert(hourlyData?[index]["time"] as! Int, at: index)
                         hourlyIcon.insert(hourlyData?[index]["icon"] as! String, at: index)
                         hourlyRainChance.insert(hourlyData?[index]["precipProbability"] as! Double, at: index)
-                        hourlyFeelsLike.insert(Int(hourlyData?[index]["apparentTemperature"] as! Double), at: index)
-                        hourlyWindSpeed.insert(hourlyData?[index]["windSpeed"] as! Double, at: index)
-                        if hourlyWindSpeed[index] != 0 {
-                            hourlyWindDirection.insert(hourlyData?[index]["windBearing"] as! Double, at: index)
-                        }
-                        else{
-                            hourlyWindDirection.insert(90, at: index)
-                        }
+                        //hourlyFeelsLike.insert(Int(hourlyData?[index]["apparentTemperature"] as! Double), at: index)
+                        //hourlyWindSpeed.insert(hourlyData?[index]["windSpeed"] as! Double, at: index)
+//                        if hourlyWindSpeed[index] != 0 {
+//                            hourlyWindDirection.insert(hourlyData?[index]["windBearing"] as! Double, at: index)
+//                        }
+//                        else{
+//                            hourlyWindDirection.insert(90, at: index)
+//                        }
 
                         hourlyTemp.insert(Int(hourlyData?[index]["temperature"] as! Double), at: index)
                         if hourlyRainChance[index] != 0 {
@@ -179,7 +186,21 @@ class WeatherGetter: UIView {
                         else{
                             hourlyPercipitationType.insert("", at: index)
                         }
+                        
+                        //For hourly more data
+                        
+                        hourlySummary.insert(hourlyData?[index]["summary"] as! String, at: index)
+                        hourlyFeelsLike.insert(Int(hourlyData?[index]["apparentTemperature"] as! Double), at: index)
+                        houtlyHumidity.insert(hourlyData?[index]["humidity"] as! Double, at: index)
+                        hourlyWindSpeed.insert(hourlyData?[index]["windSpeed"] as! Double, at: index)
+                        hourlyWindGust.insert(hourlyData?[index]["windGust"] as! Double, at: index)
+                        hourlyUVIndex.insert(hourlyData?[index]["uvIndex"] as! Int, at: index)
+                        hourlyRainIntensity.insert(hourlyData?[index]["precipIntensity"] as! Double, at: index)
+                        hourlyCloudCoverage.insert(hourlyData?[index]["cloudCover"] as! Double, at: index)
+                        hourlyVisibility.insert(hourlyData?[index]["visibility"] as! Double, at: index)
                     }
+                    
+                    self.hourlyMoreData = HourlyMoreData(summary: hourlySummary, feelsLike: hourlyFeelsLike, humidity: houtlyHumidity, windSpeed: hourlyWindSpeed, windGust: hourlyWindGust, uvIndex: hourlyUVIndex, cloudCoverage: hourlyCloudCoverage, rainIntensity: hourlyRainIntensity, visibilty: hourlyVisibility)
                     
                     UVIndex = Int(weather["currently"]!["uvIndex"]!! as! Double)
                     
@@ -202,11 +223,11 @@ class WeatherGetter: UIView {
                     }
                    
                     
-                    self.weatherData = forcastData(summary: summary, icon: icon, feelsLike: feelsLike, temperature: temp, dewPoint: dewPoint, humidity: humidity, pressure: pressure, cloudCoverage: cloudCoverage, windSpeed: windspeed, lastTimeUpdated: timeLastUpdated, timeZone: timeZone, sunsetTime: sunset, sunriseTime: sunrise, moonPhase: moonPhase, smartSummary: smartSummary, rainIntensity: rainIntensity, hourlyTime: hourlyTime, hourlyIcon: hourlyIcon, hourlyRainChance: hourlyRainChance, hourlyTemp: hourlyTemp, weeklyTime: weeklyTime, weeklyIcon: weeklyIcon, weeklyHigh: weeklyHigh, weeklyLow: weeklyLow, weeklyRainChance: weeklyRainChance, weeklySummary: weeklySummary, location: coordinates, cityName: city, uvIndex: UVIndex, hourlyPercipitationType: hourlyPercipitationType, hourlyWindSpeed: hourlyWindSpeed, hourlyWindDirection: hourlyWindDirection, hourlyFeelsLike: hourlyFeelsLike, weeklySunrise: weeklySunrise, weeklySunset: weeklySunset, weeklyPercipitationType: weeklyPercipitationType, units: units, alerts: alerts)
+                    self.weatherData = forcastData(summary: summary, icon: icon, feelsLike: feelsLike, temperature: temp, dewPoint: dewPoint, humidity: humidity, pressure: pressure, cloudCoverage: cloudCoverage, windSpeed: windspeed, lastTimeUpdated: timeLastUpdated, timeZone: timeZone, sunsetTime: sunset, sunriseTime: sunrise, moonPhase: moonPhase, smartSummary: smartSummary, rainIntensity: rainIntensity, hourlyTime: hourlyTime, hourlyIcon: hourlyIcon, hourlyRainChance: hourlyRainChance, hourlyTemp: hourlyTemp, weeklyTime: weeklyTime, weeklyIcon: weeklyIcon, weeklyHigh: weeklyHigh, weeklyLow: weeklyLow, weeklyRainChance: weeklyRainChance, weeklySummary: weeklySummary, location: coordinates, cityName: city, uvIndex: UVIndex, hourlyPercipitationType: hourlyPercipitationType, weeklySunrise: weeklySunrise, weeklySunset: weeklySunset, weeklyPercipitationType: weeklyPercipitationType, units: units, alerts: alerts)
                     
                     
                     DispatchQueue.main.sync {
-                        self.getWeatherData(weatherData: self.weatherData!)
+                        self.getWeatherData(weatherData: self.weatherData!, hourlyData: self.hourlyMoreData)
                     }
                     
                 }
@@ -228,64 +249,16 @@ class WeatherGetter: UIView {
     }
     
     
-//    func getHourlyController(hourlyController: HourlyViewController) {
-//        self.hourlyController = hourlyController
-//    }
     
-//    func setWeeklyController(weeklyController: WeeklyViewController) {
-//        self.weeklyController = weeklyController
-//    }
-    
-//    func getCurrentlyController(currentlyController: CurrentlyViewController) {
-//        self.currentlyController = currentlyController
-//    }
-    
-    
-    
-//    func hourlyControllerDidLoad() {
-//        hourlyCheck = 1
-//        print("HOURLY DID LOAD")
-//    }
-//
-//    func weeklyControllerDidLoad() {
-//        weeklyCheck = 1
-//        print("WEEKLY DID LOAD")
-//    }
-    
-//    func currentlyControllerDidLoad() {
-//        currentlyCheck = 1
-//        print("CURRENTLY DID LOAD")
-//    }
-    
-    func getWeatherData(weatherData: forcastData) {
+    func getWeatherData(weatherData: forcastData, hourlyData: HourlyMoreData) {
         
-        viewController!.updateLabels(data: weatherData)
+        viewController!.updateLabels(data: weatherData, hourlyMoreData: hourlyMoreData)
         
         
-//        if hourlyCheck == 1 {
-//            updateHourly()
-//        }
-        
-//        if weeklyCheck == 1 {
-//            updateWeekly()
-//        }
-//
-//        if currentlyCheck == 1 {
-//            updateCurrently()
-//        }
        
     }
     
-//    func updateHourly() {
-//        hourlyController!.updateLabels(data: weatherData!)
-//    }
-    
-//    func updateWeekly() {
-//        weeklyController!.updateLabels(data: weatherData!)
-//    }
-//    func updateCurrently() {
-//        currentlyController!.updateLabels(data: weatherData!)
-//    }
+
     
     private func loadSettings() -> Settings?  {
         return NSKeyedUnarchiver.unarchiveObject(withFile: Settings.ArchiveURL.path) as? Settings

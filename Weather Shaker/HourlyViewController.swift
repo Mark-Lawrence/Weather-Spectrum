@@ -32,6 +32,30 @@ class HourlyViewController: UIViewController,UITableViewDataSource, UITableViewD
     @IBOutlet weak var hourlyLabel: UILabel!
     @IBOutlet weak var navBarEffect: UIVisualEffectView!
     @IBOutlet weak var detailBlurView: UIVisualEffectView!
+    
+    @IBOutlet weak var tempTextLabel: UILabel!
+    @IBOutlet weak var feelsLikeTextLabel: UILabel!
+    @IBOutlet weak var summaryLabel: UILabel!
+    @IBOutlet weak var humidityTestLabel: UILabel!
+    @IBOutlet weak var uvIndexTextlabel: UILabel!
+    @IBOutlet weak var rainChanceTextLabel: UILabel!
+    @IBOutlet weak var rainIntensityTextLabel: UILabel!
+    @IBOutlet weak var windSpeedTextLabel: UILabel!
+    @IBOutlet weak var winsGustsTextLabel: UILabel!
+    @IBOutlet weak var cloudTextLabel: UILabel!
+    @IBOutlet weak var visibiltyTextLabel: UILabel!
+    
+    @IBOutlet weak var tempLabel: UILabel!
+    @IBOutlet weak var feelsLikeLabel: UILabel!
+    @IBOutlet weak var humidityLabel: UILabel!
+    @IBOutlet weak var uvIndexLabel: UILabel!
+    @IBOutlet weak var rainChanceLabel: UILabel!
+    @IBOutlet weak var rainIntensityLabel: UILabel!
+    @IBOutlet weak var windSpeedLabel: UILabel!
+    @IBOutlet weak var windGustsLabel: UILabel!
+    @IBOutlet weak var cloudsLabel: UILabel!
+    @IBOutlet weak var visibiltyLabel: UILabel!
+    
   
     
     @IBOutlet weak var moreDetailTime: UILabel!
@@ -63,14 +87,12 @@ class HourlyViewController: UIViewController,UITableViewDataSource, UITableViewD
     var coordinates = ""
     var dayOfWeek = [String]()
     var cityName = ""
-    var hourlyWindSpeed = [String]()
-    var hourlyWindDirection = [Double]()
-    var hourlyFeelsLike = [String]()
     var hourlyTimeDateFormat = [Date]()
     var sunriseTime: Date?
     var sunsetTime: Date?
     var textColor = [UIColor]()
     var data: forcastData?
+    var hourlyMoreData: HourlyMoreData!
     
     
     var is3DTouchAvailable: Bool {
@@ -99,8 +121,32 @@ class HourlyViewController: UIViewController,UITableViewDataSource, UITableViewD
         detailBlurView.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height)
         square.frame.size = CGSize(width: 0, height: 0)
         square.layer.cornerRadius = 11
+        square.layer.backgroundColor = navBarColors[1]
         self.detailBlurView.layer.opacity = 0
-        self.moreDetailTime.layer.opacity = 0
+        
+        self.tempTextLabel.layer.opacity = 0
+        self.feelsLikeTextLabel.layer.opacity = 0
+        self.summaryLabel.layer.opacity = 0
+        self.humidityTestLabel.layer.opacity = 0
+        self.uvIndexTextlabel.layer.opacity = 0
+        self.rainChanceTextLabel.layer.opacity = 0
+        self.rainIntensityTextLabel.layer.opacity = 0
+        self.windSpeedTextLabel.layer.opacity = 0
+        self.winsGustsTextLabel.layer.opacity = 0
+        self.cloudTextLabel.layer.opacity = 0
+        self.visibiltyTextLabel.layer.opacity = 0
+        
+        self.tempLabel.layer.opacity = 0
+        self.feelsLikeLabel.layer.opacity = 0
+        self.humidityLabel.layer.opacity = 0
+        self.uvIndexLabel.layer.opacity = 0
+        self.rainChanceLabel.layer.opacity = 0
+        self.rainIntensityLabel.layer.opacity = 0
+        self.windSpeedLabel.layer.opacity = 0
+        self.windGustsLabel.layer.opacity = 0
+        self.cloudsLabel.layer.opacity = 0
+        self.visibiltyLabel.layer.opacity = 0
+        
         
         
         animatedViewDefualtSize = CGRect(x: 10, y: 10, width: screenSize.width - 20, height: 80)
@@ -182,7 +228,28 @@ class HourlyViewController: UIViewController,UITableViewDataSource, UITableViewD
                 
             })
             UIView.animate(withDuration: 0.1, animations: {
-                self.moreDetailTime.layer.opacity = 0
+                self.tempTextLabel.layer.opacity = 0
+                self.feelsLikeTextLabel.layer.opacity = 0
+                self.summaryLabel.layer.opacity = 0
+                self.humidityTestLabel.layer.opacity = 0
+                self.uvIndexTextlabel.layer.opacity = 0
+                self.rainChanceTextLabel.layer.opacity = 0
+                self.rainIntensityTextLabel.layer.opacity = 0
+                self.windSpeedTextLabel.layer.opacity = 0
+                self.winsGustsTextLabel.layer.opacity = 0
+                self.cloudTextLabel.layer.opacity = 0
+                self.visibiltyTextLabel.layer.opacity = 0
+                
+                self.tempLabel.layer.opacity = 0
+                self.feelsLikeLabel.layer.opacity = 0
+                self.humidityLabel.layer.opacity = 0
+                self.uvIndexLabel.layer.opacity = 0
+                self.rainChanceLabel.layer.opacity = 0
+                self.rainIntensityLabel.layer.opacity = 0
+                self.windSpeedLabel.layer.opacity = 0
+                self.windGustsLabel.layer.opacity = 0
+                self.cloudsLabel.layer.opacity = 0
+                self.visibiltyLabel.layer.opacity = 0
             })
         }
         
@@ -204,9 +271,6 @@ class HourlyViewController: UIViewController,UITableViewDataSource, UITableViewD
         coordinates = data!.getLocation()
         cityName = data!.getCityName()
         dayOfWeek = data!.getHourlyDayOfWeek()
-        hourlyWindDirection = data!.getHourlyWindDirection()
-        hourlyFeelsLike = data!.getHourlyFeelsLike()
-        hourlyWindSpeed = data!.getHourlyWindSpeed()
         hourlyTimeDateFormat = data!.getHourlyTimeDate()
         sunriseTime = data!.getSunriseTime()
         sunsetTime = data!.getSunsetTime()
@@ -239,7 +303,19 @@ class HourlyViewController: UIViewController,UITableViewDataSource, UITableViewD
     }
     
     func updateMoreDetailView(index: Int) {
-        moreDetailTime.text = hourlyTime[index]
+        //moreDetailTime.text = hourlyTime[index]
+        tempLabel.text = data?.getHourlyTemp()[index]
+        feelsLikeLabel.text = "\(hourlyMoreData.feelsLike[index])º"
+        humidityLabel.text = "\(Int(hourlyMoreData.humidity[index]*100))%"
+        uvIndexLabel.text = "\(hourlyMoreData.uvIndex[index])"
+        rainChanceLabel.text = data?.getHourlyRainChance()[index]
+        rainIntensityLabel.text = "\(Int(hourlyMoreData.rainIntensity[index]*100))%"
+        summaryLabel.text = hourlyMoreData.summary[index]
+        windSpeedLabel.text = "\(Int(hourlyMoreData.windSpeed[index]))"
+        windGustsLabel.text = "\(Int(hourlyMoreData.windGust[index]))"
+        cloudsLabel.text = "\(Int(hourlyMoreData.cloudCoverage[index]*100))%"
+        visibiltyLabel.text = "\(hourlyMoreData.visibilty[index]) mi"
+        
 
     }
     func animateMoreDetail() {
@@ -256,12 +332,34 @@ class HourlyViewController: UIViewController,UITableViewDataSource, UITableViewD
         self.square.frame = CGRect(x: touchx!, y: touchy!, width: 0, height: 0)
         
         UIView.animate(withDuration: 0.2, animations: {
-            self.square.frame = CGRect(x: 15, y: self.moreDetailViewHeight, width: Int(screenWidth - 30), height: 100)
+            self.square.frame = CGRect(x: 10, y: self.moreDetailViewHeight, width: Int(screenWidth - 20), height: 134)
             self.detailBlurView.layer.opacity = 1
             self.square.layer.cornerRadius = 7
             })
         UIView.animate(withDuration: 0.3, animations: {
-            self.moreDetailTime.layer.opacity = 1
+            //self.moreDetailTime.layer.opacity = 1
+            self.tempTextLabel.layer.opacity = 1
+            self.feelsLikeTextLabel.layer.opacity = 1
+            self.summaryLabel.layer.opacity = 1
+            self.humidityTestLabel.layer.opacity = 1
+            self.uvIndexTextlabel.layer.opacity = 1
+            self.rainChanceTextLabel.layer.opacity = 1
+            self.rainIntensityTextLabel.layer.opacity = 1
+            self.windSpeedTextLabel.layer.opacity = 1
+            self.winsGustsTextLabel.layer.opacity = 1
+            self.cloudTextLabel.layer.opacity = 1
+            self.visibiltyTextLabel.layer.opacity = 1
+            
+            self.tempLabel.layer.opacity = 1
+            self.feelsLikeLabel.layer.opacity = 1
+            self.humidityLabel.layer.opacity = 1
+            self.uvIndexLabel.layer.opacity = 1
+            self.rainChanceLabel.layer.opacity = 1
+            self.rainIntensityLabel.layer.opacity = 1
+            self.windSpeedLabel.layer.opacity = 1
+            self.windGustsLabel.layer.opacity = 1
+            self.cloudsLabel.layer.opacity = 1
+            self.visibiltyLabel.layer.opacity = 1
         })
     }
     

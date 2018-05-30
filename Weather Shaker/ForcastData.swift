@@ -38,9 +38,6 @@ struct forcastData {
     var hourlyRainChance = [Double]()
     var hourlyTemp = [Int]()
     var hourlyPercipitationType = [String]()
-    var hourlyWindSpeed = [Double]()
-    var hourlyWindDirection = [Double]()
-    var hourlyFeelsLike = [Int]()
 
     var weeklyTime = [Int]()
     var weeklyIcon = [String]()
@@ -60,7 +57,7 @@ struct forcastData {
 
     
     
-    init(summary: String, icon: String, feelsLike: Int, temperature: Int, dewPoint: Int, humidity: Double, pressure: Int, cloudCoverage: Double, windSpeed: Int, lastTimeUpdated: Int, timeZone: Int, sunsetTime: Int, sunriseTime: Int, moonPhase: Double, smartSummary: String, rainIntensity: Double, hourlyTime: [Int], hourlyIcon: [String], hourlyRainChance: [Double],hourlyTemp: [Int], weeklyTime: [Int], weeklyIcon: [String], weeklyHigh: [Int], weeklyLow: [Int], weeklyRainChance: [Double], weeklySummary:[String], location: String, cityName: String, uvIndex: Int, hourlyPercipitationType: [String], hourlyWindSpeed: [Double], hourlyWindDirection: [Double], hourlyFeelsLike: [Int], weeklySunrise: [Int], weeklySunset: [Int], weeklyPercipitationType: [String], units: String, alerts: [Alert]) {
+    init(summary: String, icon: String, feelsLike: Int, temperature: Int, dewPoint: Int, humidity: Double, pressure: Int, cloudCoverage: Double, windSpeed: Int, lastTimeUpdated: Int, timeZone: Int, sunsetTime: Int, sunriseTime: Int, moonPhase: Double, smartSummary: String, rainIntensity: Double, hourlyTime: [Int], hourlyIcon: [String], hourlyRainChance: [Double],hourlyTemp: [Int], weeklyTime: [Int], weeklyIcon: [String], weeklyHigh: [Int], weeklyLow: [Int], weeklyRainChance: [Double], weeklySummary:[String], location: String, cityName: String, uvIndex: Int, hourlyPercipitationType: [String], weeklySunrise: [Int], weeklySunset: [Int], weeklyPercipitationType: [String], units: String, alerts: [Alert]) {
         self.summary = summary
         self.icon = icon
         self.temperature = temperature
@@ -85,9 +82,6 @@ struct forcastData {
         self.hourlyTime = hourlyTime
         self.hourlyRainChance = hourlyRainChance
         self.hourlyPercipitationType = hourlyPercipitationType
-        self.hourlyFeelsLike = hourlyFeelsLike
-        self.hourlyWindDirection = hourlyWindDirection
-        self.hourlyWindSpeed = hourlyWindSpeed
    
         
         self.weeklyTime = weeklyTime
@@ -244,22 +238,6 @@ struct forcastData {
             hourlyRainString.insert("\(Int (hourlyRainChance[index]*100))%", at: index)
         }
         return hourlyRainString
-    }
-    
-    func getHourlyFeelsLike() -> [String] {
-        var hourlyFeelsLikeString = [String]()
-        for index in 0...36 {
-            hourlyFeelsLikeString.insert("\(hourlyFeelsLike[index])°", at: index)
-        }
-        return hourlyFeelsLikeString
-    }
-    
-    func getHourlyWindSpeed() -> [String] {
-        return [String (describing: hourlyWindSpeed)]
-    }
-    
-    func getHourlyWindDirection() -> [Double] {
-        return hourlyWindDirection
     }
     
     func getHourlyRainChanceExtended() -> [String] {

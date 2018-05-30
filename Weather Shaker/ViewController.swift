@@ -68,6 +68,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     var latitude: Double?
     var longitude: Double?
     var weatherData: forcastData?
+    var hourlyMoreDataTransfer: HourlyMoreData!
     var cityName = ""
     
     var userSettings = Settings(unitIsUS: "Fahrenheit", defaultIsLocation: "CurrentLocation", adIsDisabled: "false", allowAdvisories: "false", allowWatches: "false", allowWarnings: "true")
@@ -198,10 +199,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
     
     
     
-    func updateLabels(data: forcastData) {
-     
+    func updateLabels(data: forcastData, hourlyMoreData: HourlyMoreData) {
         
         let currentTime = Date(timeIntervalSince1970: Double (Date().timeIntervalSince1970))
+        hourlyMoreDataTransfer = hourlyMoreData
         
         textColorArray = uiColors.getColorTextArray(data: data, currentTime: currentTime)
         
@@ -524,6 +525,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDa
             navigationItem.backBarButtonItem = backItem
             controller.backgroundColorArray = backgroundColorArray
             controller.navBarColors = navBarColors
+            controller.hourlyMoreData = hourlyMoreDataTransfer
         }
         
         if segue.identifier == "toWeekly"{

@@ -31,6 +31,7 @@
 		5FC53C251EEF61D800AC3013 /* HourlyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC53C241EEF61D800AC3013 /* HourlyTableViewCell.swift */; };
 		5FC53C2F1EF07B9700AC3013 /* WeeklyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC53C2E1EF07B9700AC3013 /* WeeklyTableViewCell.swift */; };
 		5FC53C331EF0C56F00AC3013 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC53C321EF0C56F00AC3013 /* AboutViewController.swift */; };
+		5FD4827820BE4FB7008AE0F3 /* HourlyMoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD4827720BE4FB7008AE0F3 /* HourlyMoreData.swift */; };
 		5FE499231EEB9EC9000BF01C /* HourlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE499221EEB9EC9000BF01C /* HourlyViewController.swift */; };
 		5FF047AA1EE099F600BED385 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF047A91EE099F600BED385 /* AppDelegate.swift */; };
 		5FF047AF1EE099F600BED385 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FF047AD1EE099F600BED385 /* Main.storyboard */; };
@@ -93,6 +94,7 @@
 		5FC53C241EEF61D800AC3013 /* HourlyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourlyTableViewCell.swift; sourceTree = "<group>"; };
 		5FC53C2E1EF07B9700AC3013 /* WeeklyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeeklyTableViewCell.swift; sourceTree = "<group>"; };
 		5FC53C321EF0C56F00AC3013 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		5FD4827720BE4FB7008AE0F3 /* HourlyMoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyMoreData.swift; sourceTree = "<group>"; };
 		5FE499221EEB9EC9000BF01C /* HourlyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourlyViewController.swift; sourceTree = "<group>"; };
 		5FF047A61EE099F600BED385 /* Weather Shaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather Shaker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FF047A91EE099F600BED385 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				5F7C80211F08246F0052C538 /* TextColor.swift */,
 				5F3A46DE1F21659700AFE314 /* Settings.swift */,
 				5F39B6731F89ABFF0025C203 /* ColorAlgorithm.swift */,
+				5FD4827720BE4FB7008AE0F3 /* HourlyMoreData.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				5F202AD91EF836D300D7FB22 /* CityListTableController.swift in Sources */,
 				5F2C65191EF33BE900FF3D89 /* CityList.swift in Sources */,
 				5F3A46DF1F21659700AFE314 /* Settings.swift in Sources */,
+				5FD4827820BE4FB7008AE0F3 /* HourlyMoreData.swift in Sources */,
 				5F647AB91F0426560066BAF1 /* CurrentSummaryCell.swift in Sources */,
 				5FF047BC1EE09B9400BED385 /* WeatherGetter.swift in Sources */,
 				5F64456E20127DD80091CA27 /* AlertViewController.swift in Sources */,
