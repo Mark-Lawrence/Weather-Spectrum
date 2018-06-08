@@ -32,6 +32,9 @@ class HourlyViewController: UIViewController,UITableViewDataSource, UITableViewD
     @IBOutlet weak var hourlyLabel: UILabel!
     @IBOutlet weak var navBarEffect: UIVisualEffectView!
     @IBOutlet weak var detailBlurView: UIVisualEffectView!
+    @IBOutlet weak var navBarNewHeight: NSLayoutConstraint!
+    @IBOutlet weak var hiddenNavBar: UIView!
+    @IBOutlet weak var hiddenNavBarHeight: NSLayoutConstraint!
     
     @IBOutlet weak var tempTextLabel: UILabel!
     @IBOutlet weak var feelsLikeTextLabel: UILabel!
@@ -121,7 +124,10 @@ class HourlyViewController: UIViewController,UITableViewDataSource, UITableViewD
         detailBlurView.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height)
         square.frame.size = CGSize(width: 0, height: 0)
         square.layer.cornerRadius = 11
-        square.layer.backgroundColor = navBarColors[1]
+        square.layer.backgroundColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 0.8).cgColor as CGColor
+        
+        square.layer.backgroundColor = textColor[7].withAlphaComponent(0.15).cgColor
+
         self.detailBlurView.layer.opacity = 0
         
         self.tempTextLabel.layer.opacity = 0
@@ -153,18 +159,20 @@ class HourlyViewController: UIViewController,UITableViewDataSource, UITableViewD
         
         if UIDevice().userInterfaceIdiom == .phone {
             if UIScreen.main.nativeBounds.height == 2436 {
-                backButtonLabel.frame.origin = CGPoint(x: 23, y: 55)
+                //backButtonLabel.frame.origin = CGPoint(x: 23, y: 55)
                 hourlyLabel.frame.origin = CGPoint(x: 15, y: 80)
-                navBarHeight.constant = 130
-                navBarBlurHeight.constant = 130
+                hiddenNavBarHeight.constant = 130
                 tableViewBottom.constant = -33
+                navBar.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: 130)
             }
+        }
+        else{
+            navBar.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: 110)
         }
         
         gradient.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height)
         gradient.colors = [backgroundColorArray[0] , backgroundColorArray[1]]
         view.layer.addSublayer(gradient)
-        navBar.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: 110)
         navBarGradient.frame = navBar.frame
         navBarGradient.colors = [navBarColors[0], navBarColors[1]]
         navBar.layer.addSublayer(navBarGradient)
@@ -209,10 +217,12 @@ class HourlyViewController: UIViewController,UITableViewDataSource, UITableViewD
             
             if gesture.forceValue > gesture.maxValue - 1 && newForce{
                 newForce = false
+                tableView.isScrollEnabled = false
                 animateMoreDetail()
             }
         }
         if gesture.state == .ended{
+            tableView.isScrollEnabled = true
             newForce = true
             maximumForce = gesture.maxValue
             force = gesture.forceValue

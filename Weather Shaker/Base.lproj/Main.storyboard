@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gQM-dt-Rhn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gQM-dt-Rhn">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -647,7 +647,7 @@
                                         <rect key="frame" x="0.0" y="709" width="375" height="227"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WVs-3Q-yZA" id="uaD-DV-hNS">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="227"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="226.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xwF-GN-ATx">
@@ -725,11 +725,6 @@
                             <constraint firstItem="DDj-2U-DEj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="sUf-rk-8la"/>
                             <constraint firstItem="DDj-2U-DEj" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="tse-i8-bJr"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="HMg-JB-cXH"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="Vm8-62-9Ac"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -1020,6 +1015,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P99-61-xqk">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="ocn-aa-kfT"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" delaysContentTouches="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dy1-yT-4gX">
                                 <rect key="frame" x="0.0" y="110" width="375" height="557"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1116,11 +1117,9 @@
                                     <outlet property="dataSource" destination="vk5-xh-xIX" id="bev-uG-3EM"/>
                                 </connections>
                             </tableView>
-                            <view tag="80" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eTx-3N-mnV">
+                            <view tag="80" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eTx-3N-mnV">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="110" id="wu5-hi-9cn"/>
-                                </constraints>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FjI-lI-gn7">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -1129,7 +1128,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
-                                <blurEffect style="dark"/>
+                                <blurEffect style="extraLight"/>
                             </visualEffectView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hourly" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vb0-hB-3A3">
                                 <rect key="frame" x="15" y="52" width="277" height="48"/>
@@ -1138,7 +1137,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xyb-7s-RCL">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xyb-7s-RCL">
                                 <rect key="frame" x="12" y="250" width="357" height="136"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -1388,15 +1387,17 @@
                         <constraints>
                             <constraint firstItem="dy1-yT-4gX" firstAttribute="leading" secondItem="ov6-kl-xQP" secondAttribute="leading" id="2Ka-Gb-Kjx"/>
                             <constraint firstItem="4wK-Ev-Lgd" firstAttribute="top" secondItem="dy1-yT-4gX" secondAttribute="bottom" id="BIl-xI-dQT"/>
-                            <constraint firstItem="eTx-3N-mnV" firstAttribute="leading" secondItem="ov6-kl-xQP" secondAttribute="leading" id="D2j-ia-KWi"/>
-                            <constraint firstItem="eTx-3N-mnV" firstAttribute="top" secondItem="ov6-kl-xQP" secondAttribute="top" id="K0m-f2-uq0"/>
-                            <constraint firstAttribute="trailing" secondItem="eTx-3N-mnV" secondAttribute="trailing" id="ab5-7O-AN7"/>
-                            <constraint firstItem="dy1-yT-4gX" firstAttribute="top" secondItem="eTx-3N-mnV" secondAttribute="bottom" id="jhI-XA-ZEo"/>
+                            <constraint firstItem="P99-61-xqk" firstAttribute="leading" secondItem="ov6-kl-xQP" secondAttribute="leading" id="aVl-ww-e4C"/>
+                            <constraint firstItem="dy1-yT-4gX" firstAttribute="top" secondItem="P99-61-xqk" secondAttribute="bottom" id="cB4-9e-Raj"/>
+                            <constraint firstItem="P99-61-xqk" firstAttribute="top" secondItem="ov6-kl-xQP" secondAttribute="top" id="hJD-Vn-4A6"/>
+                            <constraint firstItem="dy1-yT-4gX" firstAttribute="top" secondItem="P99-61-xqk" secondAttribute="bottom" id="kH7-AQ-wSN"/>
                             <constraint firstAttribute="trailing" secondItem="dy1-yT-4gX" secondAttribute="trailing" id="o7j-Oo-sZw"/>
+                            <constraint firstAttribute="trailing" secondItem="P99-61-xqk" secondAttribute="trailing" id="wWS-Ci-z3k"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="FjI-lI-gn7"/>
+                                <exclude reference="xyb-7s-RCL"/>
                             </mask>
                         </variation>
                     </view>
@@ -1406,11 +1407,12 @@
                         <outlet property="detailBlurView" destination="FjI-lI-gn7" id="Q7l-D7-mgn"/>
                         <outlet property="feelsLikeLabel" destination="gQb-Je-bYj" id="75o-n4-zCx"/>
                         <outlet property="feelsLikeTextLabel" destination="oOh-na-jX6" id="Mwi-JL-gx9"/>
+                        <outlet property="hiddenNavBar" destination="P99-61-xqk" id="uoO-Qk-vj1"/>
+                        <outlet property="hiddenNavBarHeight" destination="ocn-aa-kfT" id="qOE-ZR-70g"/>
                         <outlet property="hourlyLabel" destination="vb0-hB-3A3" id="hhg-VR-TVU"/>
                         <outlet property="humidityLabel" destination="2rt-kf-3yZ" id="cPV-fE-Xqf"/>
                         <outlet property="humidityTestLabel" destination="qnr-hp-PhH" id="dlH-IM-ep2"/>
                         <outlet property="navBar" destination="eTx-3N-mnV" id="cIe-kG-UD4"/>
-                        <outlet property="navBarHeight" destination="wu5-hi-9cn" id="OgM-Il-DGM"/>
                         <outlet property="rainChanceLabel" destination="K0F-Tl-lTS" id="yFR-ba-A4Q"/>
                         <outlet property="rainChanceTextLabel" destination="lW5-k9-VAU" id="0b7-M0-ORV"/>
                         <outlet property="rainIntensityLabel" destination="zaP-Mv-MhS" id="X9r-TG-cFK"/>
